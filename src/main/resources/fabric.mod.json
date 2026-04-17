@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "stormsoul",
+  "version": "${version}",
+  "name": "Stormsoul",
+  "description": "Merging the worlds of magic and electricity in ways never thought of before...",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/stormsoul/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "org.aussiebox.stormsoul.client.StormsoulClient"
+    ],
+    "main": [
+      "org.aussiebox.stormsoul.Stormsoul"
+    ],
+    "cardinal-components": [
+      "org.aussiebox.stormsoul.StormsoulComponents"
+    ]
+  },
+  "custom": {
+    "cardinal-components": [
+
+    ]
+  },
+  "mixins": [
+    "stormsoul.mixins.json",
+    {
+      "config": "stormsoul.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}",
+    "cardinal-components-base": "${cca_version}",
+    "cardinal-components-entity": "${cca_version}"
+  }
+}
