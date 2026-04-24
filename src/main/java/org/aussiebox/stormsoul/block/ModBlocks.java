@@ -2,7 +2,9 @@ package org.aussiebox.stormsoul.block;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.ExperienceDroppingBlock;
 import net.minecraft.block.MapColor;
+import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -10,6 +12,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
 import org.aussiebox.stormsoul.Stormsoul;
 import org.aussiebox.stormsoul.block.custom.ArtificialCloudBlock;
 import org.aussiebox.stormsoul.block.custom.StormRodBlock;
@@ -41,6 +44,27 @@ public class ModBlocks {
                     .dynamicBounds()
                     .nonOpaque()
                     .solid(),
+            true
+    );
+
+    public static final Block LABRADORITE_ORE = register(
+            "labradorite_ore",
+            (settings) -> new ExperienceDroppingBlock(UniformIntProvider.create(3, 7), settings),
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.STONE_GRAY)
+                    .instrument(NoteBlockInstrument.BASEDRUM)
+                    .strength(3.0F, 3.0F)
+                    .requiresTool(),
+            true
+    );
+
+    public static final Block DEEPSLATE_LABRADORITE_ORE = register(
+            "deepslate_labradorite_ore",
+            (settings) -> new ExperienceDroppingBlock(UniformIntProvider.create(3, 7), settings),
+            AbstractBlock.Settings.copyShallow(LABRADORITE_ORE)
+                    .mapColor(MapColor.DEEPSLATE_GRAY)
+                    .strength(4.5F, 3.0F)
+                    .sounds(BlockSoundGroup.DEEPSLATE),
             true
     );
 

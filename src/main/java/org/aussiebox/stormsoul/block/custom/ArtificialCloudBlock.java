@@ -33,7 +33,7 @@ public class ArtificialCloudBlock extends BlockWithEntity {
     protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (!(blockEntity instanceof ArtificialCloudBlockEntity entity)) return OUTLINE_SHAPE;
-        return OUTLINE_SHAPE.offset(0, entity.lastLargeCloudOffset/16, 0);
+        return OUTLINE_SHAPE.offset(0, ArtificialCloudBlockEntity.lastLargeCloudOffset /16, 0);
     }
 
     @Override

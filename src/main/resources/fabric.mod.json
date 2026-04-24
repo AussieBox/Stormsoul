@@ -22,7 +22,7 @@
   },
   "custom": {
     "cardinal-components": [
-
+      "stormsoul:artificial_storm"
     ]
   },
   "mixins": [
@@ -37,6 +37,7 @@
     "fabric-api": "*",
     "minecraft": "${minecraft_version}",
     "cardinal-components-base": "${cca_version}",
-    "cardinal-components-entity": "${cca_version}"
+    "cardinal-components-entity": "${cca_version}",
+    "cardinal-components-world": "${cca_version}"
   }
 }

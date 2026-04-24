@@ -18,13 +18,11 @@ import java.util.function.Function;
 
 public class ModItems {
 
-//    public static final Item DRAGON_SCALES = registerItem(
-//            "dragon_scales",
-//            Item::new,
-//            new Item.Settings()
-//                    .rarity(Rarity.EPIC)
-//                    .fireproof()
-//    );
+    public static final Item LABRADORITE = registerItem(
+            "labradorite",
+            Item::new,
+            new Item.Settings()
+    );
 
     public static final RegistryKey<ItemGroup> ITEMGROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), Stormsoul.id(Stormsoul.MOD_ID));
     public static final ItemGroup ITEMGROUP = FabricItemGroup.builder()

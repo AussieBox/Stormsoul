@@ -36,6 +36,6 @@ public class ArtificialCloudModel extends Model {
     }
 
     public void update(ArtificialCloudBlockEntity blockEntity, float tickProgress) {
-        this.root.originY = MathHelper.lerp(tickProgress, blockEntity.lastLargeCloudOffset, blockEntity.largeCloudOffset) + 2F;
+        this.root.originY = MathHelper.lerp(tickProgress, ArtificialCloudBlockEntity.lastLargeCloudOffset, ArtificialCloudBlockEntity.largeCloudOffset) + 2F;
     }
 }

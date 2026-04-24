@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "stormsoul:block/deepslate_labradorite_ore"
+  }
+}

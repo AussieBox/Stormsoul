@@ -1,6 +1,10 @@
 {
   "itemGroup.stormsoul.stormsoul": "Stormsoul",
 
+  "item.stormsoul.labradorite": "Labradorite",
+
   "block.stormsoul.storm_rod": "Storm Rod",
-  "block.stormsoul.artificial_cloud": "Artificial Cloud"
+  "block.stormsoul.artificial_cloud": "Artificial Cloud",
+  "block.stormsoul.labradorite_ore": "Labradorite Ore",
+  "block.stormsoul.deepslate_labradorite_ore": "Deepslate Labradorite Ore"
 }
