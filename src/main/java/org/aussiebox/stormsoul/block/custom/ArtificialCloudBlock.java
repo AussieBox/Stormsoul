@@ -5,6 +5,7 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
@@ -16,8 +17,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class ArtificialCloudBlock extends BlockWithEntity {
     public static final MapCodec<ArtificialCloudBlock> CODEC = createCodec(ArtificialCloudBlock::new);
-    private static final VoxelShape OUTLINE_SHAPE = VoxelShapes.cuboid(2, 3, 2, 14, 8, 14);
-    private static final VoxelShape ON_TOP_SHAPE = VoxelShapes.cuboid(1, 8, 1, 15, 8, 15);
+    private static final VoxelShape OUTLINE_SHAPE = Block.createCuboidShape(2, 2, 2, 14, 8, 14);
+    private static final VoxelShape ON_TOP_SHAPE = Block.createCuboidShape(1, 7, 1, 15, 7.8, 15);
 
     public ArtificialCloudBlock(Settings settings) {
         super(settings);
@@ -37,14 +38,21 @@ public class ArtificialCloudBlock extends BlockWithEntity {
 
     @Override
     protected VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (!(blockEntity instanceof ArtificialCloudBlockEntity cloudEntity)) return VoxelShapes.empty();
         EntityShapeContext entityContext = (EntityShapeContext) context;
 
         if (entityContext == null) return VoxelShapes.empty();
         if (entityContext.getEntity() == null) return VoxelShapes.empty();
-        if (entityContext.getEntity().getY() >= pos.getY() && !entityContext.getEntity().isSneaking()) return ON_TOP_SHAPE;
+        Entity entity = entityContext.getEntity();
+
+        if (entity.isSneaking()) return VoxelShapes.empty();
+        if (entity.getPos().getY() >= pos.getY()+0.1) return ON_TOP_SHAPE;
 
         return VoxelShapes.empty();
     }
+
+
 
     @Override
     protected VoxelShape getCameraCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
