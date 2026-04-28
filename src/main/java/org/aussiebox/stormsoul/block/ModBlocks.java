@@ -15,6 +15,7 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import org.aussiebox.stormsoul.Stormsoul;
 import org.aussiebox.stormsoul.block.custom.ArtificialCloudBlock;
+import org.aussiebox.stormsoul.block.custom.LabradoriteBatteryBlock;
 import org.aussiebox.stormsoul.block.custom.StormRodBlock;
 
 import java.util.function.Function;
@@ -65,6 +66,19 @@ public class ModBlocks {
                     .mapColor(MapColor.DEEPSLATE_GRAY)
                     .strength(4.5F, 3.0F)
                     .sounds(BlockSoundGroup.DEEPSLATE),
+            true
+    );
+
+    public static final Block COPPER_LABRADORITE_BATTERY = register(
+            "copper_labradorite_battery",
+            (settings) -> new LabradoriteBatteryBlock(200, settings),
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.BLACK)
+                    .requiresTool()
+                    .strength(3.0F, 6.0F)
+                    .sounds(BlockSoundGroup.IRON)
+                    .nonOpaque()
+                    .solid(),
             true
     );
 

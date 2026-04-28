@@ -47,7 +47,12 @@ public class ModItems {
     public static void init() {
         Registry.register(Registries.ITEM_GROUP, ITEMGROUP_KEY, ITEMGROUP);
         ItemGroupEvents.modifyEntriesEvent(ITEMGROUP_KEY).register(itemGroup -> {
-                itemGroup.add(ModBlocks.STORM_ROD);
+            itemGroup.add(ModBlocks.STORM_ROD);
+            itemGroup.add(ModBlocks.ARTIFICIAL_CLOUD);
+            itemGroup.add(ModBlocks.LABRADORITE_ORE);
+            itemGroup.add(ModBlocks.DEEPSLATE_LABRADORITE_ORE);
+            itemGroup.add(LABRADORITE);
+            itemGroup.add(ModBlocks.COPPER_LABRADORITE_BATTERY);
         });
     }
 

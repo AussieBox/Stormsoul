@@ -6,5 +6,10 @@
   "block.stormsoul.storm_rod": "Storm Rod",
   "block.stormsoul.artificial_cloud": "Artificial Cloud",
   "block.stormsoul.labradorite_ore": "Labradorite Ore",
-  "block.stormsoul.deepslate_labradorite_ore": "Deepslate Labradorite Ore"
+  "block.stormsoul.deepslate_labradorite_ore": "Deepslate Labradorite Ore",
+  "block.stormsoul.copper_labradorite_battery": "Copper Labradorite Battery",
+
+  "tooltip.stormsoul.stored_stormsoul": "Stormsoul: %s/%s",
+
+  "config.jade.plugin_stormsoul.stored_stormsoul": "Stored Stormsoul"
 }

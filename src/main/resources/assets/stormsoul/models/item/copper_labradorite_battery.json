@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "stormsoul:item/labradorite_battery_base",
+    "layer1": "stormsoul:item/copper_labradorite_battery"
+  }
+}

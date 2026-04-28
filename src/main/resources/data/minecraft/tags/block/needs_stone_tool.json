@@ -1,7 +1,9 @@
 {
   "replace": false,
   "values": [
+    "stormsoul:storm_rod",
     "stormsoul:labradorite_ore",
-    "stormsoul:deepslate_labradorite_ore"
+    "stormsoul:deepslate_labradorite_ore",
+    "stormsoul:copper_labradorite_battery"
   ]
 }

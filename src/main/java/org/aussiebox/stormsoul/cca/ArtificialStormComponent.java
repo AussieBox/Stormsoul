@@ -42,7 +42,7 @@ public class ArtificialStormComponent implements AutoSyncedComponent, ServerTick
         storming = tag.getBoolean("storming", false);
         time = tag.getInt("time", 0);
 
-        if (tag.contains("futureTimes")) futureTimes = tag.read("futureTimes", Codec.list(Codec.INT)).orElseThrow();
+        if (tag.contains("futureTimes")) futureTimes = new ArrayList<>(tag.read("futureTimes", Codec.list(Codec.INT)).orElseThrow());
         else futureTimes = new ArrayList<>();
     }
 

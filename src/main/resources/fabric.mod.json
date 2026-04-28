@@ -18,6 +18,9 @@
     ],
     "cardinal-components": [
       "org.aussiebox.stormsoul.StormsoulComponents"
+    ],
+    "jade": [
+      "org.aussiebox.stormsoul.client.jade.JadePluginHandler"
     ]
   },
   "custom": {
