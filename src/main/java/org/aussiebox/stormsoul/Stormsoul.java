@@ -18,6 +18,7 @@ import org.aussiebox.stormsoul.blockentity.ModBlockEntities;
 import org.aussiebox.stormsoul.blockentity.custom.ArtificialCloudBlockEntity;
 import org.aussiebox.stormsoul.component.ModDataComponentTypes;
 import org.aussiebox.stormsoul.item.ModItems;
+import org.aussiebox.stormsoul.recipe.ModRecipes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,6 +54,7 @@ public class Stormsoul implements ModInitializer {
         ModBlockEntities.init();
         ModItems.init();
         ModDataComponentTypes.init();
+        ModRecipes.init();
 
         Registry.register(Registries.PARTICLE_TYPE, id("artificial_cloud_spark"), ARTIFICIAL_CLOUD_SPARK);
 

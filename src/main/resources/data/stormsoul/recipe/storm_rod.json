@@ -1,0 +1,40 @@
+{
+  "type": "stormsoul:controlled_shock",
+  "ingredients": [
+    "minecraft:copper_ingot",
+    "stormsoul:labradorite",
+    "minecraft:copper_ingot"
+  ],
+  "blocks_below": [
+    {
+      "Name": "minecraft:copper_block"
+    },
+    {
+      "Name": "minecraft:copper_block"
+    },
+    {
+      "Name": "minecraft:copper_block"
+    },
+    {
+      "Name": "minecraft:copper_block"
+    },
+    {
+      "Name": "minecraft:copper_block"
+    },
+    {
+      "Name": "stormsoul:labradorite_block"
+    },
+    {
+      "Name": "stormsoul:labradorite_block"
+    },
+    {
+      "Name": "stormsoul:labradorite_block"
+    },
+    {
+      "Name": "stormsoul:labradorite_block"
+    }
+  ],
+  "result": {
+    "id": "stormsoul:storm_rod"
+  }
+}

@@ -52,6 +52,7 @@ public class ModItems {
             itemGroup.add(ModBlocks.LABRADORITE_ORE);
             itemGroup.add(ModBlocks.DEEPSLATE_LABRADORITE_ORE);
             itemGroup.add(LABRADORITE);
+            itemGroup.add(ModBlocks.LABRADORITE_BLOCK);
             itemGroup.add(ModBlocks.COPPER_LABRADORITE_BATTERY);
         });
     }

@@ -69,6 +69,18 @@ public class ModBlocks {
             true
     );
 
+    public static final Block LABRADORITE_BLOCK = register(
+            "labradorite_block",
+            Block::new,
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.LAPIS_BLUE)
+                    .instrument(NoteBlockInstrument.CHIME)
+                    .requiresTool()
+                    .strength(5.0F, 6.0F)
+                    .sounds(BlockSoundGroup.METAL),
+            true
+    );
+
     public static final Block COPPER_LABRADORITE_BATTERY = register(
             "copper_labradorite_battery",
             (settings) -> new LabradoriteBatteryBlock(200, settings),
@@ -76,7 +88,8 @@ public class ModBlocks {
                     .mapColor(MapColor.BLACK)
                     .requiresTool()
                     .strength(3.0F, 6.0F)
-                    .sounds(BlockSoundGroup.IRON)
+                    .sounds(BlockSoundGroup.METAL)
+                    .emissiveLighting(LabradoriteBatteryBlock::ifNotEmpty)
                     .nonOpaque()
                     .solid(),
             true

@@ -110,7 +110,6 @@ public abstract class AbstractStormsoulBlockEntity extends BlockEntity {
     public double addStored(double amount) {
         double oldStoredStormsoul = storedStormsoul;
         setStored(Math.min(oldStoredStormsoul + amount, getMaxStoredStormsoul() - oldStoredStormsoul));
-        Stormsoul.LOGGER.info("{} {}", Math.min(oldStoredStormsoul + amount, getMaxStoredStormsoul() - oldStoredStormsoul), getNameForReport());
         return Math.min(oldStoredStormsoul + amount, getMaxStoredStormsoul() - oldStoredStormsoul);
     }
 
@@ -277,6 +276,12 @@ public abstract class AbstractStormsoulBlockEntity extends BlockEntity {
 
         @Override
         public String asString() {
+            return id;
+        }
+
+
+        @Override
+        public String toString() {
             return id;
         }
     }

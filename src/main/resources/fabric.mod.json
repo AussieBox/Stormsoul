@@ -21,6 +21,12 @@
     ],
     "jade": [
       "org.aussiebox.stormsoul.client.jade.JadePluginHandler"
+    ],
+    "rei_client": [
+      "org.aussiebox.stormsoul.client.rei.ModREIClientPlugin"
+    ],
+    "rei_common": [
+      "org.aussiebox.stormsoul.rei.ModREIPlugin"
     ]
   },
   "custom": {

@@ -7,9 +7,15 @@
   "block.stormsoul.artificial_cloud": "Artificial Cloud",
   "block.stormsoul.labradorite_ore": "Labradorite Ore",
   "block.stormsoul.deepslate_labradorite_ore": "Deepslate Labradorite Ore",
+  "block.stormsoul.labradorite_block": "Labradorite Block",
   "block.stormsoul.copper_labradorite_battery": "Copper Labradorite Battery",
 
   "tooltip.stormsoul.stored_stormsoul": "Stormsoul: %s/%s",
 
-  "config.jade.plugin_stormsoul.stored_stormsoul": "Stored Stormsoul"
+  "config.jade.plugin_stormsoul.stored_stormsoul": "Stored Stormsoul",
+
+  "category.rei.stormsoul.controlled_shock": "Controlled Shock",
+
+  "block.property.boolean.true": "true",
+  "block.property.boolean.false": "false"
 }

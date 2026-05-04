@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "stormsoul:labradorite_block"
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "stormsoul:blocks/labradorite_block"
+}

@@ -11,7 +11,7 @@ public class StormRodBlockEntity extends AbstractStormsoulBlockEntity {
     public StormRodBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.STORM_ROD_BLOCK_ENTITY, pos, state);
         setMaxStoredStormsoul(100);
-        setTransferPerTick(10);
+        setTransferPerTick(1);
         setOutputDirections(state.get(StormRodBlock.FACING).getOpposite());
     }
 

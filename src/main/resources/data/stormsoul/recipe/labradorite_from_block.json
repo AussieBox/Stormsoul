@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stormsoul:labradorite_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "stormsoul:labradorite"
+  }
+}

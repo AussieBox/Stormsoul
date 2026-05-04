@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "stormsoul:item/copper_labradorite_battery"
+    "model": "stormsoul:item/labradorite_battery/copper"
   }
 }

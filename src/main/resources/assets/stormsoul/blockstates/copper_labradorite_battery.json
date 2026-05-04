@@ -1,7 +1,31 @@
 {
   "variants": {
-    "": {
-      "model": "stormsoul:block/copper_labradorite_battery"
+    "stored_display=0": {
+      "model": "stormsoul:block/labradorite_battery/base/0"
+    },
+    "stored_display=1": {
+      "model": "stormsoul:block/labradorite_battery/copper/1"
+    },
+    "stored_display=2": {
+      "model": "stormsoul:block/labradorite_battery/copper/2"
+    },
+    "stored_display=3": {
+      "model": "stormsoul:block/labradorite_battery/copper/3"
+    },
+    "stored_display=4": {
+      "model": "stormsoul:block/labradorite_battery/copper/4"
+    },
+    "stored_display=5": {
+      "model": "stormsoul:block/labradorite_battery/copper/5"
+    },
+    "stored_display=6": {
+      "model": "stormsoul:block/labradorite_battery/copper/6"
+    },
+    "stored_display=7": {
+      "model": "stormsoul:block/labradorite_battery/copper/7"
+    },
+    "stored_display=8": {
+      "model": "stormsoul:block/labradorite_battery/copper/8"
     }
   }
 }
