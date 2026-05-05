@@ -48,5 +48,8 @@
     "cardinal-components-base": "${cca_version}",
     "cardinal-components-entity": "${cca_version}",
     "cardinal-components-world": "${cca_version}"
+  },
+  "recommends": {
+    "continuity": "3.0.1-beta.1+1.21.6"
   }
 }

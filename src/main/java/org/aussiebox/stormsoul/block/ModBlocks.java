@@ -1,5 +1,6 @@
 package org.aussiebox.stormsoul.block;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.ExperienceDroppingBlock;
@@ -115,5 +116,6 @@ public class ModBlocks {
     }
 
     public static void init() {
+        if (!FabricLoader.getInstance().isModLoaded("continuity")) Stormsoul.LOGGER.warn("Stormsoul uses Continuity to display emissive textures for certain blocks. Installing Continuity may improve block visuals.");
     }
 }

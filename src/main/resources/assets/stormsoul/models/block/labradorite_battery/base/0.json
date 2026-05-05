@@ -75,8 +75,6 @@
 		{
 			"from": [3.011, 3, 3.011],
 			"to": [12.989, 11, 12.989],
-			"shade": false,
-			"light_emission": 15,
 			"rotation": {"angle": 0, "axis": "y", "origin": [3, 3, 3]},
 			"faces": {
 				"north": {"uv": [0, 0, 10, 8], "texture": "#2"},
