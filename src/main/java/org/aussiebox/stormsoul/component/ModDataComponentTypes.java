@@ -10,8 +10,8 @@ import java.util.function.UnaryOperator;
 
 public class ModDataComponentTypes {
 
-    public static final ComponentType<Integer> STORED_SS =
-            register("stored_ss", builder -> builder.codec(Codec.INT));
+    public static final ComponentType<Double> STORED_STORMSOUL =
+            register("stored_stormsoul", builder -> builder.codec(Codec.DOUBLE));
 
     private static <T>ComponentType<T> register(String name, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
         return Registry.register(Registries.DATA_COMPONENT_TYPE, Stormsoul.id(name),

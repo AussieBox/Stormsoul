@@ -9,6 +9,8 @@ import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.math.BlockPos;
@@ -49,6 +51,16 @@ public class LabradoriteBatteryBlock extends BlockWithEntity {
 
     public static boolean ifNotEmpty(BlockState state, BlockView world, BlockPos pos) {
         return state.get(STORED_DISPLAY, 0) != 0;
+    }
+
+    @Override
+    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+
+        if (blockEntity instanceof LabradoriteBatteryBlockEntity entity) {
+            entity.setComponents(itemStack.getComponents());
+            entity.markDirty();
+        }
     }
 
     @Override

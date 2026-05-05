@@ -4,6 +4,8 @@ import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.component.ComponentMap;
+import net.minecraft.component.ComponentsAccess;
 import net.minecraft.storage.ReadView;
 import net.minecraft.storage.WriteView;
 import net.minecraft.util.StringIdentifiable;
@@ -11,6 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.aussiebox.stormsoul.Stormsoul;
+import org.aussiebox.stormsoul.component.ModDataComponentTypes;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -222,6 +225,16 @@ public abstract class AbstractStormsoulBlockEntity extends BlockEntity {
         }
         Stormsoul.LOGGER.warn("Block in direction {} of output is not recognised as correct type", direction);
         return 0;
+    }
+
+    @Override
+    protected void addComponents(ComponentMap.Builder builder) {
+        builder.add(ModDataComponentTypes.STORED_STORMSOUL, storedStormsoul);
+    }
+
+    @Override
+    protected void readComponents(ComponentsAccess components) {
+        storedStormsoul = components.getOrDefault(ModDataComponentTypes.STORED_STORMSOUL, 0.0);
     }
 
     @Override
