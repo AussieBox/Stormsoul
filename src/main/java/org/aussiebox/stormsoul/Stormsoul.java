@@ -16,11 +16,13 @@ import net.minecraft.world.gen.feature.PlacedFeature;
 import org.aussiebox.stormsoul.block.ModBlocks;
 import org.aussiebox.stormsoul.blockentity.ModBlockEntities;
 import org.aussiebox.stormsoul.blockentity.custom.ArtificialCloudBlockEntity;
+import org.aussiebox.stormsoul.blockentity.custom.LabradoriteBatteryBlockEntity;
 import org.aussiebox.stormsoul.component.ModDataComponentTypes;
 import org.aussiebox.stormsoul.item.ModItems;
 import org.aussiebox.stormsoul.recipe.ModRecipes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import software.bernie.geckolib.loading.math.MolangQueries;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +64,8 @@ public class Stormsoul implements ModInitializer {
         BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, LABRADORITE_ORE_BURIED_PLACED_KEY);
 
         ServerTickEvents.END_SERVER_TICK.register(ArtificialCloudBlockEntity::serverTick);
+
+        MolangQueries.<LabradoriteBatteryBlockEntity>setActorVariable("query.stormsoul_capacity_percentage", actor -> 1-(actor.animatable().getStoredStormsoul()/actor.animatable().getMaxStoredStormsoul()));
 
         LOGGER.info("Common initialisation complete, enjoy!");
     }

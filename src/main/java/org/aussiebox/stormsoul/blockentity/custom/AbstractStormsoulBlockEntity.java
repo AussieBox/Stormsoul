@@ -99,7 +99,7 @@ public abstract class AbstractStormsoulBlockEntity extends BlockEntity {
     }
 
     public double setStored(double amount) {
-        storedStormsoul = Math.min(storedStormsoul + amount, getMaxStoredStormsoul());
+        storedStormsoul = Math.clamp(amount, 0.0, maxStoredStormsoul);
         markDirty();
         return storedStormsoul;
     }
@@ -111,9 +111,14 @@ public abstract class AbstractStormsoulBlockEntity extends BlockEntity {
      * @since 0.1.0
      */
     public double addStored(double amount) {
-        double oldStoredStormsoul = storedStormsoul;
-        setStored(Math.min(oldStoredStormsoul + amount, getMaxStoredStormsoul() - oldStoredStormsoul));
-        return Math.min(oldStoredStormsoul + amount, getMaxStoredStormsoul() - oldStoredStormsoul);
+        double added = Math.min(amount, Math.max(0.0, maxStoredStormsoul - storedStormsoul));
+        setStored(storedStormsoul + added);
+        if (this instanceof LabradoriteBatteryBlockEntity) {
+            System.out.println("Tried to add: " + amount);    // 100.0
+            System.out.println("Actually added: " + added); // 50.0
+            System.out.println("Remaining: " + storedStormsoul); // 0.0
+        }
+        return added;
     }
 
     /**
@@ -124,8 +129,9 @@ public abstract class AbstractStormsoulBlockEntity extends BlockEntity {
      */
     public double removeStored(double amount) {
         double oldStoredStormsoul = storedStormsoul;
-        setStored(Math.max(oldStoredStormsoul - amount, 0));
-        return Math.max(oldStoredStormsoul - amount, 0);
+        double removed = Math.min(oldStoredStormsoul, amount);
+        setStored(oldStoredStormsoul - removed);
+        return removed;
     }
 
     /**
@@ -137,7 +143,8 @@ public abstract class AbstractStormsoulBlockEntity extends BlockEntity {
      */
     public double transferStored(BlockEntity to, double amount) {
         if (!(to instanceof AbstractStormsoulBlockEntity toEntity)) return 0;
-        double add = removeStored(Math.min(toEntity.storedStormsoul + amount, toEntity.getMaxStoredStormsoul()));
+        double add = removeStored(amount);
+        Stormsoul.LOGGER.info("{} {}", amount, add);
         return toEntity.addStored(add);
     }
 

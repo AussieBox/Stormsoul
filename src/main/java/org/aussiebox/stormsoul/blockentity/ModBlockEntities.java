@@ -18,8 +18,8 @@ public class ModBlockEntities {
             register("artificial_cloud", ArtificialCloudBlockEntity::new, ModBlocks.ARTIFICIAL_CLOUD);
     public static final BlockEntityType<StormRodBlockEntity> STORM_ROD_BLOCK_ENTITY =
             register("storm_rod", StormRodBlockEntity::new, ModBlocks.STORM_ROD);
-    public static final BlockEntityType<LabradoriteBatteryBlockEntity> LABRADORITE_BATTERY_BLOCK_ENTITY =
-            register("labradorite_battery", LabradoriteBatteryBlockEntity::new, ModBlocks.COPPER_LABRADORITE_BATTERY);
+    public static final BlockEntityType<LabradoriteBatteryBlockEntity> COPPER_LABRADORITE_BATTERY_BLOCK_ENTITY =
+            register("copper_labradorite_battery", LabradoriteBatteryBlockEntity::new, ModBlocks.COPPER_LABRADORITE_BATTERY);
 
     private static <T extends BlockEntity> BlockEntityType<T> register(String name, FabricBlockEntityTypeBuilder.Factory<? extends T> entityFactory, Block... blocks) {
         return Registry.register(Registries.BLOCK_ENTITY_TYPE, Stormsoul.id(name), FabricBlockEntityTypeBuilder.<T>create(entityFactory, blocks).build());

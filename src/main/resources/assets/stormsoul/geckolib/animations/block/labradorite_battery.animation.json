@@ -1,0 +1,15 @@
+{
+	"format_version": "1.21.0",
+	"animations": {
+		"misc.idle": {
+			"loop": true,
+			"bones": {
+				"base_capacity": {
+					"scale": {
+						"vector": [1, "query.stormsoul_capacity_percentage", 1]
+					}
+				}
+			}
+		}
+	}
+}

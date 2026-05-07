@@ -65,7 +65,7 @@ dependencies {
 
     modImplementation "maven.modrinth:geckolib:${project.geckolib_version}"
 
-    // modRuntimeOnly "maven.modrinth:jade:${project.jade_version}"
+    modRuntimeOnly "maven.modrinth:jade:${project.jade_version}"
     modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:$rei_version"
     modRuntimeOnly "me.djtheredstoner:DevAuth-${project.devauth_module}:${project.devauth_version}"
 

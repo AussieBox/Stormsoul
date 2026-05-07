@@ -84,13 +84,12 @@ public class ModBlocks {
 
     public static final Block COPPER_LABRADORITE_BATTERY = register(
             "copper_labradorite_battery",
-            (settings) -> new LabradoriteBatteryBlock(200, settings),
+            (settings) -> new LabradoriteBatteryBlock(1000000000, settings),
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.BLACK)
                     .requiresTool()
                     .strength(3.0F, 6.0F)
                     .sounds(BlockSoundGroup.METAL)
-                    .emissiveLighting(LabradoriteBatteryBlock::ifNotEmpty)
                     .nonOpaque()
                     .solid(),
             true

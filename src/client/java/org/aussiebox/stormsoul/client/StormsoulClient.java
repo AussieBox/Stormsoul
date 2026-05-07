@@ -10,6 +10,8 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import org.aussiebox.stormsoul.Stormsoul;
 import org.aussiebox.stormsoul.block.ModBlocks;
 import org.aussiebox.stormsoul.blockentity.ModBlockEntities;
+import org.aussiebox.stormsoul.client.geckolib.model.LabradoriteBatteryModel;
+import org.aussiebox.stormsoul.client.geckolib.renderer.LabradoriteBatteryRenderer;
 import org.aussiebox.stormsoul.client.geckolib.renderer.StormsoulIlluminosRenderer;
 import org.aussiebox.stormsoul.client.model.ArtificialCloudModel;
 import org.aussiebox.stormsoul.client.particle.ArtificialCloudSparkParticle;
@@ -32,6 +34,7 @@ public class StormsoulClient implements ClientModInitializer {
         );
 
         BlockEntityRendererFactories.register(ModBlockEntities.ARTIFICIAL_CLOUD_BLOCK_ENTITY, ArtificialCloudBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntities.COPPER_LABRADORITE_BATTERY_BLOCK_ENTITY, (context) -> new LabradoriteBatteryRenderer(new LabradoriteBatteryModel(Stormsoul.id("textures/block/copper_labradorite_battery.png"))));
 
         EntityModelLayerRegistry.registerModelLayer(ArtificialCloudModel.LAYER, ArtificialCloudModel::getTexturedModelData);
 
