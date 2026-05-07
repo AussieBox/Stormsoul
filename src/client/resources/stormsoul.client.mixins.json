@@ -1,9 +1,10 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "org.aussiebox.stormsoul.mixin.client",
+  "package": "org.aussiebox.stormsoul.client.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
+    "InGameHudMixin"
   ],
   "injectors": {
     "defaultRequire": 1

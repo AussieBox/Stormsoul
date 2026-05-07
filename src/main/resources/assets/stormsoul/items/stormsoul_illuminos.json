@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "stormsoul:item/stormsoul_illuminos",
+    "model": {
+      "type": "geckolib:geckolib"
+    }
+  }
+}

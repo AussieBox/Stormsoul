@@ -2,26 +2,41 @@ package org.aussiebox.stormsoul.item;
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.text.Text;
+import net.minecraft.util.Rarity;
 import org.aussiebox.stormsoul.Stormsoul;
 import org.aussiebox.stormsoul.block.ModBlocks;
+import org.aussiebox.stormsoul.item.custom.StormsoulIlluminosItem;
 
 import java.util.function.Function;
 
 public class ModItems {
 
+    public static final ToolMaterial STORMSOUL;
+
+    static {
+        STORMSOUL = new ToolMaterial(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 5012, 10.0F, 5.0F, 20, TagKey.of(RegistryKeys.ITEM, Stormsoul.id("stormsoul_tool_materials")));
+    }
+
     public static final Item LABRADORITE = registerItem(
             "labradorite",
             Item::new,
             new Item.Settings()
+    );
+
+    public static final StormsoulIlluminosItem STORMSOUL_ILLUMINOS = registerItem(
+            "stormsoul_illuminos",
+            StormsoulIlluminosItem::new,
+            new Item.Settings()
+                    .rarity(Rarity.RARE)
+                    .sword(STORMSOUL, 3.0F, -2.0F)
     );
 
     public static final RegistryKey<ItemGroup> ITEMGROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), Stormsoul.id(Stormsoul.MOD_ID));
@@ -30,9 +45,9 @@ public class ModItems {
             .displayName(Text.translatable("itemGroup.stormsoul.stormsoul"))
             .build();
 
-    public static Item registerItem(String name, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
+    public static <I extends Item> I registerItem(String name, Function<Item.Settings, I> itemFactory, Item.Settings settings) {
         RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, Stormsoul.id(name));
-        Item item = itemFactory.apply(settings.registryKey(itemKey));
+        I item = itemFactory.apply(settings.registryKey(itemKey));
         Registry.register(Registries.ITEM, itemKey, item);
         return item;
     }
@@ -54,6 +69,7 @@ public class ModItems {
             itemGroup.add(LABRADORITE);
             itemGroup.add(ModBlocks.LABRADORITE_BLOCK);
             itemGroup.add(ModBlocks.COPPER_LABRADORITE_BATTERY);
+            itemGroup.add(STORMSOUL_ILLUMINOS);
         });
     }
 

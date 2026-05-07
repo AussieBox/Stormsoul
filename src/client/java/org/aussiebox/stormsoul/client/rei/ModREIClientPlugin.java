@@ -8,13 +8,16 @@ import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
 import me.shedaniel.rei.api.client.registry.entry.EntryRegistry;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.entry.EntryStack;
+import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import org.aussiebox.stormsoul.client.rei.category.ControlledShockREICategory;
 import org.aussiebox.stormsoul.client.rei.entryrenderer.BlockStateEntryRenderer;
 import org.aussiebox.stormsoul.recipe.ControlledShockRecipe;
 import org.aussiebox.stormsoul.rei.EntryTypes;
+import org.aussiebox.stormsoul.rei.ModREIPlugin;
 import org.aussiebox.stormsoul.rei.display.ControlledShockREIDisplay;
 
 public class ModREIClientPlugin implements REIClientPlugin {
@@ -27,6 +30,7 @@ public class ModREIClientPlugin implements REIClientPlugin {
     @Override
     public void registerCategories(CategoryRegistry registry) {
         registry.add(new ControlledShockREICategory());
+        registry.addWorkstations(ModREIPlugin.CONTROLLED_SHOCK, EntryStacks.of(Items.LIGHTNING_ROD));
     }
 
     @Override

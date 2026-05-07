@@ -4,7 +4,8 @@
   "version": "${version}",
   "name": "Stormsoul",
   "description": "Merging the worlds of magic and electricity in ways never thought of before...",
-  "authors": [],
+  "authors": ["AussieBox"],
+  "contributors": ["flingus (@flngus)", "vred (@vred_)"],
   "contact": {},
   "license": "MIT",
   "icon": "assets/stormsoul/icon.png",
@@ -45,9 +46,10 @@
     "fabricloader": ">=${loader_version}",
     "fabric-api": "*",
     "minecraft": "${minecraft_version}",
-    "cardinal-components-base": "${cca_version}",
-    "cardinal-components-entity": "${cca_version}",
-    "cardinal-components-world": "${cca_version}"
+    "cardinal-components-base": ">=${cca_version}",
+    "cardinal-components-entity": ">=${cca_version}",
+    "cardinal-components-world": ">=${cca_version}",
+    "geckolib": ">=${geckolib_version}"
   },
   "recommends": {
     "continuity": "3.0.1-beta.1+1.21.6"

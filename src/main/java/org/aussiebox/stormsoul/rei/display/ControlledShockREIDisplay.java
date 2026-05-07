@@ -41,7 +41,7 @@ public class ControlledShockREIDisplay extends BasicDisplay {
         this(getInputs(recipe), getOutputs(recipe));
     }
 
-    private static List<EntryIngredient> getInputs(ControlledShockRecipe recipe) {
+    public static List<EntryIngredient> getInputs(ControlledShockRecipe recipe) {
         List<EntryIngredient> inputs = new ArrayList<>(EntryIngredients.ofIngredients(recipe.getIngredients()));
         recipe.getBelowBlocks().forEach(blockState ->
                 inputs.add(EntryIngredient.of(EntryStack.of(EntryTypes.BLOCK_STATE, blockState)))

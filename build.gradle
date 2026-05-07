@@ -36,6 +36,15 @@ repositories {
         name = "Shedaniel's Maven"
         url = "https://maven.shedaniel.me/"
     }
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "GeckoLib"
+                url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
+            }
+        }
+        filter { includeGroupAndSubgroups("com.geckolib") }
+    }
     maven {
         name = "DevAuth"
         url = "https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1"
@@ -54,13 +63,15 @@ dependencies {
     modImplementation "org.ladysnake.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
     modImplementation "org.ladysnake.cardinal-components-api:cardinal-components-world:${project.cca_version}"
 
-    modImplementation "maven.modrinth:jade:${project.jade_version}"
+    modImplementation "maven.modrinth:geckolib:${project.geckolib_version}"
 
-    modLocalRuntime "me.shedaniel:RoughlyEnoughItems-fabric:$rei_version"
-    modLocalRuntime "me.djtheredstoner:DevAuth-${project.devauth_module}:${project.devauth_version}"
+    // modRuntimeOnly "maven.modrinth:jade:${project.jade_version}"
+    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:$rei_version"
+    modRuntimeOnly "me.djtheredstoner:DevAuth-${project.devauth_module}:${project.devauth_version}"
 
-    modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:$rei_version"
-    modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:$rei_version"
+    modCompileOnly "maven.modrinth:jade:${project.jade_version}"
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}"
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${project.rei_version}"
 }
 
 processResources {
@@ -73,7 +84,8 @@ processResources {
         expand "version": project.version,
                 "minecraft_version": project.minecraft_version,
                 "loader_version": project.loader_version,
-                "cca_version": project.cca_version
+                "cca_version": project.cca_version,
+                "geckolib_version": project.geckolib_version
     }
 }
 
