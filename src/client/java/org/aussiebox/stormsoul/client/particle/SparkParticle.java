@@ -11,10 +11,10 @@ import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.util.Colors;
 import org.jetbrains.annotations.NotNull;
 
-public class ArtificialCloudSparkParticle extends AnimatedParticle {
+public class SparkParticle extends AnimatedParticle {
     private final SpriteProvider sprites;
 
-    protected ArtificialCloudSparkParticle(ClientWorld clientWorld, double x, double y, double z, SpriteProvider sprites) {
+    protected SparkParticle(ClientWorld clientWorld, double x, double y, double z, SpriteProvider sprites) {
         super(clientWorld, x, y, z, sprites, 0.0125F);
         this.sprites = sprites;
         this.velocityMultiplier = 0.9F;
@@ -40,7 +40,7 @@ public class ArtificialCloudSparkParticle extends AnimatedParticle {
         }
 
         public Particle createParticle(@NotNull SimpleParticleType simpleParticleType, @NotNull ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-            return new ArtificialCloudSparkParticle(clientWorld, d, e, f, this.sprites);
+            return new SparkParticle(clientWorld, d, e, f, this.sprites);
         }
     }
 }

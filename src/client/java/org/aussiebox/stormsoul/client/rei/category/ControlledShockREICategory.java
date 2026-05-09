@@ -61,12 +61,7 @@ public class ControlledShockREICategory implements DisplayCategory<ControlledSho
     }
 
     @Override
-    public int getDisplayWidth(ControlledShockREIDisplay display) {
-        return DisplayCategory.super.getDisplayWidth(display);
-    }
-
-    @Override
     public int getDisplayHeight() {
-        return 100;
+        return 52;
     }
 }

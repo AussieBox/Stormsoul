@@ -1,0 +1,8 @@
+{
+  "block.wire_connector.violent_disconnect": {
+    "sounds": [
+      "stormsoul:wire_violent_disconnect"
+    ],
+    "subtitle": "subtitles.stormsoul.block.wire_connector.violent_disconnect"
+  }
+}

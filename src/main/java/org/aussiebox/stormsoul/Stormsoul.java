@@ -39,6 +39,7 @@ public class Stormsoul implements ModInitializer {
     }
 
     public static final SimpleParticleType ARTIFICIAL_CLOUD_SPARK = FabricParticleTypes.simple();
+    public static final SimpleParticleType STORMSOUL_SPARK = FabricParticleTypes.simple();
 
     public static final RegistryKey<PlacedFeature> LABRADORITE_ORE_PLACED_KEY = RegistryKey.of(RegistryKeys.PLACED_FEATURE, id("ore_labradorite"));
     public static final RegistryKey<PlacedFeature> LABRADORITE_ORE_BURIED_PLACED_KEY = RegistryKey.of(RegistryKeys.PLACED_FEATURE, id("ore_labradorite_buried"));
@@ -59,6 +60,7 @@ public class Stormsoul implements ModInitializer {
         ModRecipes.init();
 
         Registry.register(Registries.PARTICLE_TYPE, id("artificial_cloud_spark"), ARTIFICIAL_CLOUD_SPARK);
+        Registry.register(Registries.PARTICLE_TYPE, id("stormsoul_spark"), STORMSOUL_SPARK);
 
         BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, LABRADORITE_ORE_PLACED_KEY);
         BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, LABRADORITE_ORE_BURIED_PLACED_KEY);

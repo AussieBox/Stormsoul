@@ -35,6 +35,11 @@ public class ArtificialStormComponent implements AutoSyncedComponent, ServerTick
             storming =! storming;
         }
         time--;
+        sync();
+    }
+
+    public void sync() {
+        KEY.sync(this.world);
     }
 
     @Override

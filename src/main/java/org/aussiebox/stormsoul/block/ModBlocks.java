@@ -18,6 +18,7 @@ import org.aussiebox.stormsoul.Stormsoul;
 import org.aussiebox.stormsoul.block.custom.ArtificialCloudBlock;
 import org.aussiebox.stormsoul.block.custom.LabradoriteBatteryBlock;
 import org.aussiebox.stormsoul.block.custom.StormRodBlock;
+import org.aussiebox.stormsoul.block.custom.WireConnectorBlock;
 
 import java.util.function.Function;
 
@@ -84,11 +85,24 @@ public class ModBlocks {
 
     public static final Block COPPER_LABRADORITE_BATTERY = register(
             "copper_labradorite_battery",
-            (settings) -> new LabradoriteBatteryBlock(1000000000, settings),
+            (settings) -> new LabradoriteBatteryBlock(200, settings),
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.BLACK)
                     .requiresTool()
                     .strength(3.0F, 6.0F)
+                    .sounds(BlockSoundGroup.METAL)
+                    .nonOpaque()
+                    .solid(),
+            true
+    );
+
+    public static final Block WIRE_CONNECTOR = register(
+            "wire_connector",
+            WireConnectorBlock::new,
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.IRON_GRAY)
+                    .requiresTool()
+                    .strength(1.5F, 3.0F)
                     .sounds(BlockSoundGroup.METAL)
                     .nonOpaque()
                     .solid(),

@@ -2,6 +2,11 @@ package org.aussiebox.stormsoul.blockentity.custom;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -30,5 +35,15 @@ public class ArtificialCloudBlockEntity extends BlockEntity {
 
         largeCloudMovementTime += largeCloudMovementChange;
         largeCloudOffset = (float) StormsoulUtil.smoothInterpolate(-0.7, 0.7, largeCloudMovementTime, true);
+    }
+
+    @Override
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
+    }
+
+    @Override
+    public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
+        return createNbt(registryLookup);
     }
 }

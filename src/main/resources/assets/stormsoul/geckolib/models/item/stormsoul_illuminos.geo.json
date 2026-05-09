@@ -1,5 +1,5 @@
 {
-	"format_version": "1.21.0",
+	"format_version": "1.21.110",
 	"minecraft:geometry": [
 		{
 			"description": {
@@ -215,7 +215,10 @@
 								"down": {"uv": [16, 4], "uv_size": [2, -2]}
 							}
 						}
-					]
+					],
+					"locators": {
+						"cube_particle": [-1, 11, 0.5]
+					}
 				}
 			]
 		}

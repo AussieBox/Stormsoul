@@ -32,7 +32,8 @@
   },
   "custom": {
     "cardinal-components": [
-      "stormsoul:artificial_storm"
+      "stormsoul:artificial_storm",
+      "stormsoul:player"
     ]
   },
   "mixins": [

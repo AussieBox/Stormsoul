@@ -36,14 +36,12 @@ repositories {
         name = "Shedaniel's Maven"
         url = "https://maven.shedaniel.me/"
     }
-    exclusiveContent {
-        forRepository {
-            maven {
-                name = "GeckoLib"
-                url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
-            }
+    maven {
+        name = 'GeckoLib'
+        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        content {
+            includeGroup("software.bernie.geckolib")
         }
-        filter { includeGroupAndSubgroups("com.geckolib") }
     }
     maven {
         name = "DevAuth"
@@ -63,7 +61,7 @@ dependencies {
     modImplementation "org.ladysnake.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
     modImplementation "org.ladysnake.cardinal-components-api:cardinal-components-world:${project.cca_version}"
 
-    modImplementation "maven.modrinth:geckolib:${project.geckolib_version}"
+    modImplementation "software.bernie.geckolib:geckolib-fabric-${project.minecraft_version}:${project.geckolib_version}"
 
     modRuntimeOnly "maven.modrinth:jade:${project.jade_version}"
     modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:$rei_version"

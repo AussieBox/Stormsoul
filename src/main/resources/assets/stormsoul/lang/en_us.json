@@ -3,6 +3,7 @@
 
   "item.stormsoul.labradorite": "Labradorite",
   "item.stormsoul.stormsoul_illuminos": "Stormsoul Illuminos",
+  "item.stormsoul.copper_wire_spool": "Copper Wire Spool",
 
   "block.stormsoul.storm_rod": "Storm Rod",
   "block.stormsoul.artificial_cloud": "Artificial Cloud",
@@ -10,6 +11,7 @@
   "block.stormsoul.deepslate_labradorite_ore": "Deepslate Labradorite Ore",
   "block.stormsoul.labradorite_block": "Labradorite Block",
   "block.stormsoul.copper_labradorite_battery": "Copper Labradorite Battery",
+  "block.stormsoul.wire_connector": "Wire Connector",
 
   "tooltip.stormsoul.stored_stormsoul": "Stormsoul: %s/%s",
 
@@ -18,5 +20,7 @@
   "category.rei.stormsoul.controlled_shock": "Controlled Shock",
 
   "block.property.boolean.true": "true",
-  "block.property.boolean.false": "false"
+  "block.property.boolean.false": "false",
+
+  "subtitles.stormsoul.block.wire_connector.violent_disconnect": "Wire violently disconnects"
 }

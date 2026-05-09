@@ -4,11 +4,13 @@ import com.llamalad7.mixinextras.lib.apache.commons.mutable.MutableObject;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
+import net.minecraft.util.math.Vec3d;
 import org.aussiebox.stormsoul.util.StormsoulUtil;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.client.GeoRenderProvider;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animatable.manager.AnimatableManager;
+import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
@@ -24,7 +26,13 @@ public class StormsoulIlluminosItem extends Item implements GeoItem {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(DefaultAnimations.genericIdleController());
+        controllers.add(DefaultAnimations.genericIdleController()
+                .setParticleKeyframeHandler(event -> {
+                    Vec3d pos = event.animationState().getData(DataTickets.POSITION);
+
+                    String effect = event.keyframeData().getEffect();
+                    String locator = event.keyframeData().getLocator();
+                }));
     }
 
     @Override

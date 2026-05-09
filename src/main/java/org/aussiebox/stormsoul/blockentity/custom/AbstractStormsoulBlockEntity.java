@@ -6,6 +6,11 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.component.ComponentMap;
 import net.minecraft.component.ComponentsAccess;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.storage.ReadView;
 import net.minecraft.storage.WriteView;
 import net.minecraft.util.StringIdentifiable;
@@ -113,11 +118,6 @@ public abstract class AbstractStormsoulBlockEntity extends BlockEntity {
     public double addStored(double amount) {
         double added = Math.min(amount, Math.max(0.0, maxStoredStormsoul - storedStormsoul));
         setStored(storedStormsoul + added);
-        if (this instanceof LabradoriteBatteryBlockEntity) {
-            System.out.println("Tried to add: " + amount);    // 100.0
-            System.out.println("Actually added: " + added); // 50.0
-            System.out.println("Remaining: " + storedStormsoul); // 0.0
-        }
         return added;
     }
 
@@ -144,7 +144,6 @@ public abstract class AbstractStormsoulBlockEntity extends BlockEntity {
     public double transferStored(BlockEntity to, double amount) {
         if (!(to instanceof AbstractStormsoulBlockEntity toEntity)) return 0;
         double add = removeStored(amount);
-        Stormsoul.LOGGER.info("{} {}", amount, add);
         return toEntity.addStored(add);
     }
 
@@ -268,6 +267,16 @@ public abstract class AbstractStormsoulBlockEntity extends BlockEntity {
         tag.put("outputDirections", Codec.list(Direction.CODEC), outputDirections);
         tag.put("transferDirections", Codec.list(Direction.CODEC), transferDirections);
         tag.put("transferMethod", TransferMethod.CODEC, transferMethod);
+    }
+
+    @Override
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
+    }
+
+    @Override
+    public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
+        return createNbt(registryLookup);
     }
 
     public enum TransferMethod implements StringIdentifiable {

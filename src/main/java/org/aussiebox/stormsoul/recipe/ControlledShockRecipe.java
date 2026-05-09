@@ -15,7 +15,6 @@ import net.minecraft.world.World;
 import org.apache.commons.lang3.mutable.MutableInt;
 import org.aussiebox.stormsoul.Stormsoul;
 import org.aussiebox.stormsoul.recipe.inventory.ControlledShockInventory;
-import org.aussiebox.stormsoul.recipe.serializer.ControlledShockRecipeSerializer;
 import org.aussiebox.stormsoul.util.StormsoulUtil;
 
 import java.util.ArrayList;
@@ -85,7 +84,7 @@ public class ControlledShockRecipe implements Recipe<ControlledShockInventory> {
 
     @Override
     public RecipeSerializer<? extends Recipe<ControlledShockInventory>> getSerializer() {
-        return ControlledShockRecipeSerializer.INSTANCE;
+        return ModRecipes.CONTROLLED_SHOCK_SERIALIZER;
     }
 
     @Override

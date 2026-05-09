@@ -14,6 +14,7 @@ import net.minecraft.util.Rarity;
 import org.aussiebox.stormsoul.Stormsoul;
 import org.aussiebox.stormsoul.block.ModBlocks;
 import org.aussiebox.stormsoul.item.custom.StormsoulIlluminosItem;
+import org.aussiebox.stormsoul.item.custom.WireSpoolItem;
 
 import java.util.function.Function;
 
@@ -37,6 +38,12 @@ public class ModItems {
             new Item.Settings()
                     .rarity(Rarity.RARE)
                     .sword(STORMSOUL, 3.0F, -2.0F)
+    );
+
+    public static final Item COPPER_WIRE_SPOOL = registerItem(
+            "copper_wire_spool",
+            WireSpoolItem::new,
+            new Item.Settings()
     );
 
     public static final RegistryKey<ItemGroup> ITEMGROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), Stormsoul.id(Stormsoul.MOD_ID));
@@ -70,6 +77,8 @@ public class ModItems {
             itemGroup.add(ModBlocks.LABRADORITE_BLOCK);
             itemGroup.add(ModBlocks.COPPER_LABRADORITE_BATTERY);
             itemGroup.add(STORMSOUL_ILLUMINOS);
+            itemGroup.add(ModBlocks.WIRE_CONNECTOR);
+            itemGroup.add(COPPER_WIRE_SPOOL);
         });
     }
 

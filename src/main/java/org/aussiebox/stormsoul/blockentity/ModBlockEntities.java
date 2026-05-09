@@ -11,6 +11,7 @@ import org.aussiebox.stormsoul.block.ModBlocks;
 import org.aussiebox.stormsoul.blockentity.custom.ArtificialCloudBlockEntity;
 import org.aussiebox.stormsoul.blockentity.custom.LabradoriteBatteryBlockEntity;
 import org.aussiebox.stormsoul.blockentity.custom.StormRodBlockEntity;
+import org.aussiebox.stormsoul.blockentity.custom.WireConnectorBlockEntity;
 
 public class ModBlockEntities {
 
@@ -20,6 +21,8 @@ public class ModBlockEntities {
             register("storm_rod", StormRodBlockEntity::new, ModBlocks.STORM_ROD);
     public static final BlockEntityType<LabradoriteBatteryBlockEntity> COPPER_LABRADORITE_BATTERY_BLOCK_ENTITY =
             register("copper_labradorite_battery", LabradoriteBatteryBlockEntity::new, ModBlocks.COPPER_LABRADORITE_BATTERY);
+    public static final BlockEntityType<WireConnectorBlockEntity> WIRE_CONNECTOR_BLOCK_ENTITY =
+            register("wire", WireConnectorBlockEntity::new, ModBlocks.WIRE_CONNECTOR);
 
     private static <T extends BlockEntity> BlockEntityType<T> register(String name, FabricBlockEntityTypeBuilder.Factory<? extends T> entityFactory, Block... blocks) {
         return Registry.register(Registries.BLOCK_ENTITY_TYPE, Stormsoul.id(name), FabricBlockEntityTypeBuilder.<T>create(entityFactory, blocks).build());
