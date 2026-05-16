@@ -1,0 +1,6 @@
+{
+  "parent": "stormsoul:item/wire_spool/base",
+  "textures": {
+    "layer1": "stormsoul:item/wire_spool/copper"
+  }
+}

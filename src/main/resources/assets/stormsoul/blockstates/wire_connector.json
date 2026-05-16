@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "stormsoul:block/wire_connector"
+    },
+    "facing=east": {
+      "model": "stormsoul:block/wire_connector",
+      "x": 90,
+      "y": 270
+    },
+    "facing=north": {
+      "model": "stormsoul:block/wire_connector",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south": {
+      "model": "stormsoul:block/wire_connector",
+      "x": 90
+    },
+    "facing=up": {
+      "model": "stormsoul:block/wire_connector",
+      "x": 180
+    },
+    "facing=west": {
+      "model": "stormsoul:block/wire_connector",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

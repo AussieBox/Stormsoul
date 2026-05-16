@@ -1,0 +1,6 @@
+High Priority:
+TODO: Fix REI Support
+
+Low Priority:
+TODO: Add particles to Stormsoul Illuminos
+TODO: Create Wire Connector model

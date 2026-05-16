@@ -3,7 +3,7 @@
 
   "item.stormsoul.labradorite": "Labradorite",
   "item.stormsoul.stormsoul_illuminos": "Stormsoul Illuminos",
-  "item.stormsoul.copper_wire_spool": "Copper Wire Spool",
+  "item.stormsoul.copper_wire_spool": "Spool of Copper Wire",
 
   "block.stormsoul.storm_rod": "Storm Rod",
   "block.stormsoul.artificial_cloud": "Artificial Cloud",
@@ -18,9 +18,13 @@
   "config.jade.plugin_stormsoul.stored_stormsoul": "Stored Stormsoul",
 
   "category.rei.stormsoul.controlled_shock": "Controlled Shock",
+  "category.rei.stormsoul.controlled_shock.ingredients": "Ingredients:",
 
   "block.property.boolean.true": "true",
   "block.property.boolean.false": "false",
 
-  "subtitles.stormsoul.block.wire_connector.violent_disconnect": "Wire violently disconnects"
+  "subtitles.stormsoul.block.wire_connector.violent_disconnect": "Wire violently disconnects",
+
+  "death.attack.energy_transmission": "%s's head was the most efficient connection",
+  "death.attack.zipline_fall": "%s was the weakest link"
 }

@@ -13,8 +13,10 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Rarity;
 import org.aussiebox.stormsoul.Stormsoul;
 import org.aussiebox.stormsoul.block.ModBlocks;
+import org.aussiebox.stormsoul.component.ModDataComponentTypes;
 import org.aussiebox.stormsoul.item.custom.StormsoulIlluminosItem;
 import org.aussiebox.stormsoul.item.custom.WireSpoolItem;
+import org.aussiebox.stormsoul.util.WireType;
 
 import java.util.function.Function;
 
@@ -44,6 +46,7 @@ public class ModItems {
             "copper_wire_spool",
             WireSpoolItem::new,
             new Item.Settings()
+                    .component(ModDataComponentTypes.WIRE_TYPE, WireType.COPPER)
     );
 
     public static final RegistryKey<ItemGroup> ITEMGROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), Stormsoul.id(Stormsoul.MOD_ID));

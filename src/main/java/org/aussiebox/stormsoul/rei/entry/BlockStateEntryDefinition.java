@@ -1,6 +1,7 @@
 package org.aussiebox.stormsoul.rei.entry;
 
 import com.mojang.serialization.Codec;
+import lombok.Setter;
 import me.shedaniel.rei.api.client.entry.renderer.EntryRenderer;
 import me.shedaniel.rei.api.common.entry.EntrySerializer;
 import me.shedaniel.rei.api.common.entry.EntryStack;
@@ -24,6 +25,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.stream.Stream;
 
 public class BlockStateEntryDefinition implements EntryDefinition<BlockState>, EntrySerializer<BlockState> {
+    @Setter private static EntryRenderer<BlockState> renderer = null;
+
     @Override
     public Codec<BlockState> codec() {
         return BlockState.CODEC;
@@ -47,7 +50,7 @@ public class BlockStateEntryDefinition implements EntryDefinition<BlockState>, E
     @Override
     @Environment(EnvType.CLIENT)
     public EntryRenderer<BlockState> getRenderer() {
-        return EntryRenderer.empty();
+        return renderer;
     }
 
     @Override

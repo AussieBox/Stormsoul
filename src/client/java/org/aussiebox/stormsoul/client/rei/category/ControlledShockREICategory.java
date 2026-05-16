@@ -10,12 +10,17 @@ import me.shedaniel.rei.api.client.gui.widgets.Widgets;
 import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
+import me.shedaniel.rei.api.common.entry.EntryStack;
 import me.shedaniel.rei.api.common.util.EntryStacks;
+import net.minecraft.block.Blocks;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
 import org.aussiebox.stormsoul.block.ModBlocks;
+import org.aussiebox.stormsoul.rei.EntryTypes;
 import org.aussiebox.stormsoul.rei.ModREIPlugin;
 import org.aussiebox.stormsoul.rei.display.ControlledShockREIDisplay;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ControlledShockREICategory implements DisplayCategory<ControlledShockREIDisplay> {
@@ -36,24 +41,34 @@ public class ControlledShockREICategory implements DisplayCategory<ControlledSho
 
     @Override
     public List<Widget> setupDisplay(ControlledShockREIDisplay display, Rectangle bounds) {
-        Point startPoint = new Point(bounds.getCenterX() - 58, bounds.getCenterY() - 27);
         List<Widget> widgets = Lists.newArrayList();
         widgets.add(Widgets.createRecipeBase(bounds));
-        widgets.add(Widgets.createArrow(new Point(startPoint.x + 60, startPoint.y + 18)));
-        widgets.add(Widgets.createResultSlotBackground(new Point(startPoint.x + 95, startPoint.y + 19)));
+        Text text = Text.translatable("category.rei.stormsoul.controlled_shock.ingredients");
+        widgets.add(Widgets.createLabel(new Point(bounds.x + 5 + (MinecraftClient.getInstance().textRenderer.getWidth(text)/2), bounds.y + 5), text));
+        widgets.add(Widgets.createSlot(new Point(bounds.getMaxX() - 54 + 12, bounds.getMaxY() - 54 - 21 - 6)).entry(EntryStack.of(EntryTypes.BLOCK_STATE, Blocks.LIGHTNING_ROD.getDefaultState())));
 
-        List<Slot> slots = Lists.newArrayList();
+        int blockX = -1;
+        int blockY = 0;
+        int itemX = -1;
+        int itemY = 0;
+        List<Slot> slots = new ArrayList<>();
         List<EntryIngredient> input = display.getInputEntries();
-        int x = 0;
-        int y = 0;
         for (EntryIngredient ingredient : input) {
-            x++;
-            if (x > 3) {
-                x = 1;
-                y++;
+            if (ingredient.getFirst().getType() == EntryTypes.BLOCK_STATE) {
+                blockX++;
+                if (blockX > 2) {
+                    blockX = 0;
+                    blockY++;
+                }
+                slots.add(Widgets.createSlot(new Point(bounds.getMaxX() - 54 - 6 + (blockX * 18), bounds.getMaxY() - 54 - 6 + (blockY * 18))).markInput().entries(ingredient));
+            } else {
+                itemX++;
+                if (itemX > 2) {
+                    itemX = 0;
+                    itemY++;
+                }
+                slots.add(Widgets.createSlot(new Point(bounds.x + 6 + (itemX * 18), bounds.y + 17 + (itemY * 18))).markInput().entries(ingredient));
             }
-
-            slots.add(Widgets.createSlot(new Point(startPoint.x + 1 + x * 18, startPoint.y + 1 + y * 18)).markInput().entries(ingredient));
         }
 
         widgets.addAll(slots);
@@ -62,6 +77,6 @@ public class ControlledShockREICategory implements DisplayCategory<ControlledSho
 
     @Override
     public int getDisplayHeight() {
-        return 52;
+        return 100;
     }
 }

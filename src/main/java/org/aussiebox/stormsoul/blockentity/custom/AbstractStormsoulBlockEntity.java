@@ -214,6 +214,9 @@ public abstract class AbstractStormsoulBlockEntity extends BlockEntity {
                 if (directions.isEmpty()) break;
                 stormsoulEntity.transferToNeighbor(world, pos, directions.getFirst(), stormsoulEntity.getTransferPerTick());
             }
+            case NONE -> {
+
+            }
             default -> {
                 for (Direction direction : stormsoulEntity.getOutputDirections())
                     stormsoulEntity.transferToNeighbor(world, pos, direction, stormsoulEntity.getTransferPerTick());
@@ -284,7 +287,8 @@ public abstract class AbstractStormsoulBlockEntity extends BlockEntity {
         PRIORITISE_THEN_SPLIT("prioritise_then_split", 1, 5),
         IN_ORDER("in_order", 1, 6),
         RANDOM_ALL("random_all"),
-        RANDOM_ONE("random_one");
+        RANDOM_ONE("random_one"),
+        NONE("none");
 
         public static final StringIdentifiable.EnumCodec<TransferMethod> CODEC = StringIdentifiable.createCodec(TransferMethod::values);
         private final String id;

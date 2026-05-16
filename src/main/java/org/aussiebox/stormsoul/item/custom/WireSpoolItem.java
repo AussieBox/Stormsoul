@@ -8,6 +8,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.aussiebox.stormsoul.blockentity.custom.WireConnectorBlockEntity;
 import org.aussiebox.stormsoul.component.ModDataComponentTypes;
+import org.aussiebox.stormsoul.util.WireType;
 
 import java.util.Optional;
 
@@ -25,10 +26,12 @@ public class WireSpoolItem extends Item {
         if (!context.getStack().contains(ModDataComponentTypes.EDITING_WIRE_AT)) {
             if (wireEntity.getEditor().isEmpty()) {
                 wireEntity.setEditor(Optional.ofNullable(context.getPlayer()));
+                wireEntity.setWireType(Optional.ofNullable(context.getStack().getOrDefault(ModDataComponentTypes.WIRE_TYPE, WireType.COPPER)));
                 context.getStack().set(ModDataComponentTypes.EDITING_WIRE_AT, wireEntity.getPos());
                 return ActionResult.SUCCESS;
             } else if (wireEntity.getEditor().get() == context.getPlayer()) {
                 wireEntity.setEditor(Optional.empty());
+                wireEntity.setWireType(Optional.empty());
                 context.getStack().remove(ModDataComponentTypes.EDITING_WIRE_AT);
                 return ActionResult.SUCCESS;
             }
