@@ -3,6 +3,7 @@ package org.aussiebox.stormsoul;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.particle.SimpleParticleType;
@@ -17,6 +18,7 @@ import org.aussiebox.stormsoul.block.ModBlocks;
 import org.aussiebox.stormsoul.blockentity.ModBlockEntities;
 import org.aussiebox.stormsoul.blockentity.custom.ArtificialCloudBlockEntity;
 import org.aussiebox.stormsoul.blockentity.custom.LabradoriteBatteryBlockEntity;
+import org.aussiebox.stormsoul.command.MainCommand;
 import org.aussiebox.stormsoul.component.ModDataComponentTypes;
 import org.aussiebox.stormsoul.item.ModItems;
 import org.aussiebox.stormsoul.recipe.ModRecipes;
@@ -66,6 +68,10 @@ public class Stormsoul implements ModInitializer {
         BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, LABRADORITE_ORE_BURIED_PLACED_KEY);
 
         ServerTickEvents.END_SERVER_TICK.register(ArtificialCloudBlockEntity::serverTick);
+
+        CommandRegistrationCallback.EVENT.register(((dispatcher, registryAccess, environment) -> {
+            MainCommand.register(dispatcher);
+        }));
 
         MolangQueries.<LabradoriteBatteryBlockEntity>setActorVariable("query.stormsoul_capacity_percentage", actor -> 1-(actor.animatable().getStoredStormsoul()/actor.animatable().getMaxStoredStormsoul()));
 

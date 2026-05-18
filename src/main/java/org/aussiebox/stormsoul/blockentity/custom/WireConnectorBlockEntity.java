@@ -61,7 +61,7 @@ public class WireConnectorBlockEntity extends AbstractStormsoulBlockEntity {
                 while (iterator.hasNext()) {
                     float progress = iterator.next();
                     progress += connectorEntity.getTransferDurationPerSegment() / segments;
-                    if (progress < 1f) iterator.set(progress);
+                    if (progress <= 1f) iterator.set(progress);
                     else {
                         iterator.remove();
                         connectorEntity.stormsoulInTransfer -= connectedToEntity.addStored(Math.min(connectorEntity.stormsoulInTransfer, connectorEntity.getTransferPerTick()));

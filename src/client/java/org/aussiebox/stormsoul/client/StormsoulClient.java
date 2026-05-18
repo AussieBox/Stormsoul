@@ -12,6 +12,7 @@ import org.aussiebox.stormsoul.block.ModBlocks;
 import org.aussiebox.stormsoul.blockentity.ModBlockEntities;
 import org.aussiebox.stormsoul.client.geckolib.model.LabradoriteBatteryModel;
 import org.aussiebox.stormsoul.client.geckolib.renderer.LabradoriteBatteryRenderer;
+import org.aussiebox.stormsoul.client.geckolib.renderer.StormRodRenderer;
 import org.aussiebox.stormsoul.client.geckolib.renderer.StormsoulIlluminosRenderer;
 import org.aussiebox.stormsoul.client.model.ArtificialCloudModel;
 import org.aussiebox.stormsoul.client.particle.SparkParticle;
@@ -31,10 +32,12 @@ public class StormsoulClient implements ClientModInitializer {
     public void onInitializeClient() {
         BlockRenderLayerMap.putBlocks(BlockRenderLayer.TRANSLUCENT,
                 ModBlocks.ARTIFICIAL_CLOUD,
+                ModBlocks.STORM_ROD,
                 ModBlocks.COPPER_LABRADORITE_BATTERY
         );
 
         BlockEntityRendererFactories.register(ModBlockEntities.ARTIFICIAL_CLOUD_BLOCK_ENTITY, ArtificialCloudBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntities.STORM_ROD_BLOCK_ENTITY, (context) -> new StormRodRenderer());
         BlockEntityRendererFactories.register(ModBlockEntities.COPPER_LABRADORITE_BATTERY_BLOCK_ENTITY, (context) -> new LabradoriteBatteryRenderer(new LabradoriteBatteryModel(Stormsoul.id("textures/block/copper_labradorite_battery.png"))));
         BlockEntityRendererFactories.register(ModBlockEntities.WIRE_CONNECTOR_BLOCK_ENTITY, WireConnectorBlockEntityRenderer::new);
 

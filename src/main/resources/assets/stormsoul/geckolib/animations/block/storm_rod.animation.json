@@ -1,0 +1,93 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"idle": {
+			"loop": true,
+			"bones": {
+				"ring_upper": {
+					"rotation": {
+						"vector": [
+							"((-2 + 2) / 2) - math.sin(query.life_time* 10) * ((-2 - 2) / 2)",
+							"-query.life_time*10",
+							"((-2 + 2) / 2) + math.sin(query.life_time* 50) * ((-2 - 2) / 2)"
+						]
+					}
+				},
+				"ring_lower": {
+					"rotation": {
+						"vector": [
+							"((-2 + 2) / 2) - math.sin(query.life_time* 10) * ((-2 - 2) / 2)",
+							"query.life_time*10",
+							"-((-2 + 2) / 2) + math.sin(query.life_time* 10) * ((-2 - 2) / 2)"
+						]
+					}
+				},
+				"flash": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
+				}
+			}
+		},
+		"active": {
+			"loop": true,
+			"bones": {
+				"ring_upper": {
+					"rotation": {
+						"vector": [
+							"-((-5 + 5) / 2) - math.sin(query.life_time* 100) * ((-5 - 5) / 2)",
+							"-query.life_time*100",
+							"((-5 + 5) / 2) + math.sin(query.life_time* 100) * ((-5 - 5) / 2)"
+						]
+					}
+				},
+				"ring_lower": {
+					"rotation": {
+						"vector": [
+							"((-5 + 5) / 2) - math.sin(query.anim_time * 100) * ((-5 - 5) / 2)",
+							"query.anim_time*100",
+							"-((-5 + 5) / 2) + math.sin(query.anim_time * 100) * ((-5 - 5) / 2)"
+						]
+					}
+				},
+				"flash": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
+				}
+			}
+		},
+		"struck": {
+			"loop": true,
+			"bones": {
+				"ring_upper": {
+					"rotation": {
+						"vector": [
+							"-((-8 + 8) / 2) - math.sin(query.life_time* 1000) * ((-8 - 8) / 2)",
+							"-query.life_time*500",
+							"((-8 + 8) / 2) + math.sin(query.life_time* 1000) * ((-8 - 8) / 2)"
+						]
+					}
+				},
+				"ring_lower": {
+					"rotation": {
+						"vector": [
+							"((-8 + 8) / 2) - math.sin(query.anim_time * 1000) * ((-8 - 8) / 2)",
+							"query.anim_time*500",
+							"-((-8 + 8) / 2) + math.sin(query.anim_time * 1000) * ((-8 - 8) / 2)"
+						]
+					}
+				},
+				"flash": {
+					"scale": {
+						"vector": [
+							"math.mod(query.anim_time, 0.1) >= 0.05 ? 1.0 : 0.0",
+							"math.mod(query.anim_time, 0.1) >= 0.05 ? 1.0 : 0.0",
+							"math.mod(query.anim_time, 0.1) >= 0.05 ? 1.0 : 0.0"
+						]
+					}
+				}
+			}
+		}
+	}
+}

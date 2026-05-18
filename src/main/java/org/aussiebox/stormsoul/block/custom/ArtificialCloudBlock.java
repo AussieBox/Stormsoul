@@ -6,6 +6,8 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.Entity;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
@@ -19,6 +21,8 @@ public class ArtificialCloudBlock extends BlockWithEntity {
     public static final MapCodec<ArtificialCloudBlock> CODEC = createCodec(ArtificialCloudBlock::new);
     private static final VoxelShape OUTLINE_SHAPE = Block.createCuboidShape(2, 2, 2, 14, 8, 14);
     private static final VoxelShape ON_TOP_SHAPE = Block.createCuboidShape(1, 7, 1, 15, 7.8, 15);
+
+    public static final BooleanProperty STRIKING = BooleanProperty.of("striking");
 
     public ArtificialCloudBlock(Settings settings) {
         super(settings);
@@ -52,8 +56,6 @@ public class ArtificialCloudBlock extends BlockWithEntity {
         return VoxelShapes.empty();
     }
 
-
-
     @Override
     protected VoxelShape getCameraCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return VoxelShapes.empty();
@@ -73,5 +75,10 @@ public class ArtificialCloudBlock extends BlockWithEntity {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         return validateTicker(type, ModBlockEntities.ARTIFICIAL_CLOUD_BLOCK_ENTITY, ArtificialCloudBlockEntity::tick);
+    }
+
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        builder.add(STRIKING);
     }
 }

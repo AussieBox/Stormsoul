@@ -44,6 +44,10 @@ repositories {
         }
     }
     maven {
+        name = "RedlanceMinecraft"
+        url = "https://repo.redlance.org/public"
+    }
+    maven {
         name = "DevAuth"
         url = "https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1"
     }
@@ -62,6 +66,7 @@ dependencies {
     modImplementation "org.ladysnake.cardinal-components-api:cardinal-components-world:${project.cca_version}"
 
     modImplementation "software.bernie.geckolib:geckolib-fabric-${project.minecraft_version}:${project.geckolib_version}"
+    modImplementation "com.zigythebird.playeranim:PlayerAnimationLibFabric:${project.pal_version}"
 
     modRuntimeOnly "maven.modrinth:jade:${project.jade_version}"
     modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:$rei_version"

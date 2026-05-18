@@ -30,12 +30,15 @@ public class ArtificialStormComponent implements AutoSyncedComponent, ServerTick
         while (futureTimes.size() < 10) {
             futureTimes.add(Stormsoul.RANDOM.nextInt(8000, 24000));
         }
-        if (time <= 0) {
-            time = futureTimes.removeFirst();
-            storming =! storming;
-        }
+        if (time <= 0) advance();
         time--;
         sync();
+    }
+
+    public boolean advance() {
+        time = futureTimes.removeFirst();
+        storming =! storming;
+        return storming;
     }
 
     public void sync() {

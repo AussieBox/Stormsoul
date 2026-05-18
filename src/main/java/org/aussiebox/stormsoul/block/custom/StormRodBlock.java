@@ -2,6 +2,7 @@ package org.aussiebox.stormsoul.block.custom;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -21,7 +22,6 @@ import org.jetbrains.annotations.Nullable;
 public class StormRodBlock extends RodBlockWithEntity {
     public static final MapCodec<StormRodBlock> CODEC = createCodec(StormRodBlock::new);
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-    public static final BooleanProperty POWERED = Properties.POWERED;
 
     public StormRodBlock(Settings settings) {
         super(settings);
@@ -40,8 +40,13 @@ public class StormRodBlock extends RodBlockWithEntity {
     }
 
     @Override
+    protected BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.INVISIBLE;
+    }
+
+    @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(FACING, POWERED, WATERLOGGED);
+        builder.add(FACING, WATERLOGGED);
     }
 
     @Override

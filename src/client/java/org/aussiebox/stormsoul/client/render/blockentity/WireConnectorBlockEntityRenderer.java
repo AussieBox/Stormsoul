@@ -7,10 +7,14 @@ import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Arm;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import org.aussiebox.stormsoul.Stormsoul;
+import org.aussiebox.stormsoul.block.custom.WireConnectorBlock;
 import org.aussiebox.stormsoul.blockentity.custom.WireConnectorBlockEntity;
 import org.aussiebox.stormsoul.util.WireType;
 import org.joml.Matrix4f;
@@ -28,17 +32,24 @@ public class WireConnectorBlockEntityRenderer<T extends WireConnectorBlockEntity
         if (entity.getWorld() == null) return;
         Optional<Vec3d> connectedOptional = entity.getConnectedTo();
         Optional<WireType> wireTypeOptional = entity.getWireType();
-        if (connectedOptional.isEmpty() || wireTypeOptional.isEmpty()) return;
-        Vec3d connectedTo = connectedOptional.get();
+        if ((connectedOptional.isEmpty() && entity.getEditor().isEmpty()) || wireTypeOptional.isEmpty()) return;
+        Vec3d connectedTo = connectedOptional.orElse(Vec3d.ZERO);
         WireType wireType = wireTypeOptional.get();
 
-        if (entity.getEditor().isPresent())
-            connectedTo = entity.getEditor().get().getLeashPos(tickProgress);
+        if (entity.getEditor().isPresent()) {
+            connectedTo = getStackPos(entity.getEditor().get(), tickProgress);
+        }
 
-        double x1 = 0.5, y1 = 0.5, z1 = 0.5;
-        double x2 = connectedTo.getX() - entity.getPos().getX() + 0.5;
-        double y2 = connectedTo.getY() - entity.getPos().getY() + 0.5;
-        double z2 = connectedTo.getZ() - entity.getPos().getZ() + 0.5;
+        WireConnectorBlockEntity connectedToEntity = null;
+        if (entity.getWorld().getBlockEntity(BlockPos.ofFloored(connectedTo)) instanceof WireConnectorBlockEntity connectedEntity) connectedToEntity = connectedEntity;
+
+        Vec3d offset = getConnectionOffset(entity.getCachedState().get(WireConnectorBlock.FACING));
+        Vec3d targetOffset = connectedToEntity != null ? getConnectionOffset(connectedToEntity.getCachedState().get(WireConnectorBlock.FACING).getOpposite()) : new Vec3d(0, 0, 0);
+        Vec3d targetPos = connectedToEntity != null ? Vec3d.of(entity.getPos()).add(targetOffset) : Vec3d.of(entity.getPos()).add(offset);
+        double x1 = 0.5 + offset.getX(), y1 = 0.5 + offset.getY(), z1 = 0.5 + offset.getZ();
+        double x2 = connectedTo.getX() - targetPos.getX() + 0.5;
+        double y2 = connectedTo.getY() - targetPos.getY() + 0.5;
+        double z2 = connectedTo.getZ() - targetPos.getZ() + 0.5;
 
         VertexConsumer buffer = vertexConsumers.getBuffer(RenderLayer.getEntitySolid(Stormsoul.id("textures/entity/wire_connector/" + wireType.asString() + ".png")));
         Matrix4f posMatrix = matrices.peek().getPositionMatrix();
@@ -51,7 +62,6 @@ public class WireConnectorBlockEntityRenderer<T extends WireConnectorBlockEntity
         for (int i = 0; i < segments; i++) {
             float f1 = (float) i / segments;
             float f2 = (float) (i + 1) / segments;
-
             float f2_overlap = f2 + (1.0f / segments) * 0.05f;
 
             float ax = (float) MathHelper.lerp(f1, x1, x2);
@@ -70,16 +80,40 @@ public class WireConnectorBlockEntityRenderer<T extends WireConnectorBlockEntity
             float dy = by - ay;
             float dz = bz - az;
             float mag = MathHelper.sqrt(dx * dx + dy * dy + dz * dz);
+
+            if (mag < 0.0001f) continue;
+
             dx /= mag; dy /= mag; dz /= mag;
 
-            float rx = dz * thickness;
-            float ry = 0;
-            float rz = -dx * thickness;
-            float ux = dy * rz - dz * ry;
-            float uy = dz * rx - dx * rz;
-            float uz = dx * ry - dy * rx;
+            // Find a vector that is NOT parallel to the wire
+            float tX = (Math.abs(dx) < 0.6f) ? 1.0f : 0.0f;
+            float tY = (Math.abs(dx) < 0.6f) ? 0.0f : 1.0f;
+            float tZ = 0.0f;
 
-            light = WorldRenderer.getLightmapCoordinates(entity.getWorld(), new BlockPos((int) (ax+ux-rx), (int) (ay+uy-ry), (int) (az+uz-rz)));
+            // First perpendicular vector (Right vector)
+            float rx = (dy * tZ - dz * tY);
+            float ry = (dz * tX - dx * tZ);
+            float rz = (dx * tY - dy * tX);
+
+            // Normalize the right vector
+            float rMag = MathHelper.sqrt(rx * rx + ry * ry + rz * rz);
+            rx = (rx / rMag) * thickness;
+            ry = (ry / rMag) * thickness;
+            rz = (rz / rMag) * thickness;
+
+            // Second perpendicular vector (Up vector - cross product of wire direction and Right vector)
+            float ux = (dy * rz - dz * ry);
+            float uy = (dz * rx - dx * rz);
+            float uz = (dx * ry - dy * rx);
+
+            // Normalize the up vector
+            float uMag = MathHelper.sqrt(ux * ux + uy * uy + uz * uz);
+            ux = (ux / uMag) * thickness;
+            uy = (uy / uMag) * thickness;
+            uz = (uz / uMag) * thickness;
+
+            // Light map calculation using the center point of the segment
+            light = WorldRenderer.getLightmapCoordinates(entity.getWorld(), new BlockPos((int) ax, (int) ay, (int) az));
 
             /// Top face
             drawQuad(buffer, posMatrix,
@@ -121,6 +155,9 @@ public class WireConnectorBlockEntityRenderer<T extends WireConnectorBlockEntity
             float lastProgress;
             if (progress == 0) lastProgress = 0;
             else lastProgress = entity.getLastPowerProgresses().get(i);
+
+            progress *= 1.05f;
+            lastProgress *= 1.05f;
 
             float curCubeX = (float) MathHelper.lerp(progress, x1, x2);
             float curCubeY = (float) (MathHelper.lerp(progress, y1, y2) - (sag * 4 * progress * (1 - progress)));
@@ -192,5 +229,59 @@ public class WireConnectorBlockEntityRenderer<T extends WireConnectorBlockEntity
     @Override
     public boolean rendersOutsideBoundingBox() {
         return true;
+    }
+
+    public Vec3d getConnectionOffset(Direction direction) {
+        switch (direction) {
+            case UP -> {
+                return new Vec3d(0, 0.35, 0);
+            }
+            case DOWN -> {
+                return new Vec3d(0, -0.35, 0);
+            }
+            case NORTH -> {
+                return new Vec3d(0, 0, -0.35);
+            }
+            case EAST -> {
+                return new Vec3d(0.35, 0, 0);
+            }
+            case SOUTH -> {
+                return new Vec3d(0, 0, 0.35);
+            }
+            case WEST -> {
+                return new Vec3d(-0.35, 0, 0);
+            }
+            case null, default -> {
+                return new Vec3d(0, 0, 0);
+            }
+        }
+    }
+
+    public Vec3d getStackPos(PlayerEntity entity, float tickProgress) {
+        double d = 0.22 * (entity.getMainArm() == Arm.RIGHT ? -1.0 : 1.0);
+        float f = MathHelper.lerp(tickProgress * 0.5F, entity.getPitch(), entity.lastPitch) * (float) (Math.PI / 180.0);
+        float g = MathHelper.lerp(tickProgress, entity.lastBodyYaw, entity.bodyYaw) * (float) (Math.PI / 180.0);
+        if (entity.isGliding() || entity.isUsingRiptide()) {
+            Vec3d vec3d = entity.getRotationVec(tickProgress);
+            Vec3d vec3d2 = entity.getVelocity();
+            double e = vec3d2.horizontalLengthSquared();
+            double h = vec3d.horizontalLengthSquared();
+            float k;
+            if (e > 0.0 && h > 0.0) {
+                double i = (vec3d2.x * vec3d.x + vec3d2.z * vec3d.z) / Math.sqrt(e * h);
+                double j = vec3d2.x * vec3d.z - vec3d2.z * vec3d.x;
+                k = (float)(Math.signum(j) * Math.acos(i));
+            } else {
+                k = 0.0F;
+            }
+
+            return entity.getLerpedPos(tickProgress).add(new Vec3d(d, -0.11, 0.85).rotateZ(-k).rotateX(-f).rotateY(-g));
+        } else if (entity.isInSwimmingPose()) {
+            return entity.getLerpedPos(tickProgress).add(new Vec3d(d, 0.2, -0.15).rotateX(-f).rotateY(-g));
+        } else {
+            double l = entity.getBoundingBox().getLengthY() - 1.0;
+            double e = entity.isInSneakingPose() ? -0.2 : 0.07;
+            return entity.getLerpedPos(tickProgress).add(new Vec3d(d, l, e).rotateY(-g));
+        }
     }
 }

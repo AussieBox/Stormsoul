@@ -38,6 +38,17 @@ public class WireSpoolItem extends Item {
         } else {
             BlockEntity linkingTo = world.getBlockEntity(context.getStack().get(ModDataComponentTypes.EDITING_WIRE_AT));
             if (!(linkingTo instanceof WireConnectorBlockEntity linkingToEntity)) return super.useOnBlock(context);
+            if (world.getBlockEntity(context.getStack().get(ModDataComponentTypes.EDITING_WIRE_AT)) instanceof WireConnectorBlockEntity connectingFrom && connectingFrom.getEditor().orElse(context.getPlayer()) != context.getPlayer()) {
+                context.getStack().remove(ModDataComponentTypes.EDITING_WIRE_AT);
+                return ActionResult.SUCCESS;
+            }
+            if (wireEntity.getPos() == linkingTo.getPos()) {
+                wireEntity.setEditor(Optional.empty());
+                wireEntity.setWireType(Optional.empty());
+                wireEntity.setConnectedTo(Optional.empty());
+                context.getStack().remove(ModDataComponentTypes.EDITING_WIRE_AT);
+                return ActionResult.SUCCESS;
+            }
 
             linkingToEntity.setEditor(Optional.empty());
             linkingToEntity.setConnectedTo(Optional.of(Vec3d.of(entity.getPos())));
