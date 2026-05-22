@@ -22,6 +22,9 @@ public class ModDataComponentTypes {
     public static final ComponentType<WireType> WIRE_TYPE =
             register("wire_type", builder -> builder.codec(StringIdentifiable.createCodec(WireType::values)));
 
+    public static final ComponentType<Integer> HITS_SINCE_SURGE =
+            register("hits_since_surge", builder -> builder.codec(Codec.INT));
+
     private static <T>ComponentType<T> register(String name, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
         return Registry.register(Registries.DATA_COMPONENT_TYPE, Stormsoul.id(name),
                 builderOperator.apply(ComponentType.builder()).build());

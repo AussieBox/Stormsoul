@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "L": "stormsoul:labradorite",
+    "B": "minecraft:smooth_basalt"
+  },
+  "pattern": [
+    "LB ",
+    "BB ",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "id": "stormsoul:labradorite_geode"
+  }
+}

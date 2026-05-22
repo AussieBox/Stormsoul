@@ -2,7 +2,7 @@
   "type": "stormsoul:controlled_shock",
   "ingredients": [
     "minecraft:copper_ingot",
-    "stormsoul:labradorite",
+    "stormsoul:labrasteel_ingot",
     "minecraft:copper_ingot"
   ],
   "blocks_below": [

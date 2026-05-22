@@ -1,11 +1,9 @@
 package org.aussiebox.stormsoul.block;
 
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.ExperienceDroppingBlock;
 import net.minecraft.block.MapColor;
-import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -16,7 +14,7 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import org.aussiebox.stormsoul.Stormsoul;
 import org.aussiebox.stormsoul.block.custom.ArtificialCloudBlock;
-import org.aussiebox.stormsoul.block.custom.LabradoriteBatteryBlock;
+import org.aussiebox.stormsoul.block.custom.LabrasteelBatteryBlock;
 import org.aussiebox.stormsoul.block.custom.StormRodBlock;
 import org.aussiebox.stormsoul.block.custom.WireConnectorBlock;
 
@@ -24,7 +22,7 @@ import java.util.function.Function;
 
 public class ModBlocks {
 
-    public static final Block STORM_ROD = register(
+    public static Block STORM_ROD = register(
             "storm_rod",
             StormRodBlock::new,
             AbstractBlock.Settings.create()
@@ -33,11 +31,10 @@ public class ModBlocks {
                     .strength(3.0F, 6.0F)
                     .sounds(BlockSoundGroup.COPPER)
                     .nonOpaque()
-                    .solid(),
-            true
+                    .solid()
     );
 
-    public static final Block ARTIFICIAL_CLOUD = register(
+    public static final Block ARTIFICIAL_CLOUD = registerWithItem(
             "artificial_cloud",
             ArtificialCloudBlock::new,
             AbstractBlock.Settings.create()
@@ -46,77 +43,109 @@ public class ModBlocks {
                     .sounds(BlockSoundGroup.WOOL)
                     .dynamicBounds()
                     .nonOpaque()
-                    .solid(),
-            true
+                    .solid()
     );
 
-    public static final Block LABRADORITE_ORE = register(
+    public static final Block LABRADORITE_ORE = registerWithItem(
             "labradorite_ore",
-            (settings) -> new ExperienceDroppingBlock(UniformIntProvider.create(3, 7), settings),
+            (settings) -> new ExperienceDroppingBlock(UniformIntProvider.create(3, 8), settings),
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.STONE_GRAY)
-                    .instrument(NoteBlockInstrument.BASEDRUM)
                     .strength(3.0F, 3.0F)
-                    .requiresTool(),
-            true
+                    .sounds(BlockSoundGroup.STONE)
+                    .requiresTool()
     );
 
-    public static final Block DEEPSLATE_LABRADORITE_ORE = register(
+    public static final Block DEEPSLATE_LABRADORITE_ORE = registerWithItem(
             "deepslate_labradorite_ore",
-            (settings) -> new ExperienceDroppingBlock(UniformIntProvider.create(3, 7), settings),
-            AbstractBlock.Settings.copyShallow(LABRADORITE_ORE)
+            (settings) -> new ExperienceDroppingBlock(UniformIntProvider.create(3, 8), settings),
+            AbstractBlock.Settings.create()
                     .mapColor(MapColor.DEEPSLATE_GRAY)
                     .strength(4.5F, 3.0F)
-                    .sounds(BlockSoundGroup.DEEPSLATE),
-            true
+                    .sounds(BlockSoundGroup.DEEPSLATE)
+                    .requiresTool()
     );
 
-    public static final Block LABRADORITE_BLOCK = register(
+    public static final Block LABRADORITE_BLOCK = registerWithItem(
             "labradorite_block",
             Block::new,
             AbstractBlock.Settings.create()
-                    .mapColor(MapColor.LAPIS_BLUE)
-                    .instrument(NoteBlockInstrument.CHIME)
-                    .requiresTool()
+                    .mapColor(MapColor.DIAMOND_BLUE)
                     .strength(5.0F, 6.0F)
-                    .sounds(BlockSoundGroup.METAL),
-            true
+                    .sounds(BlockSoundGroup.AMETHYST_BLOCK)
+                    .requiresTool()
     );
 
-    public static final Block COPPER_LABRADORITE_BATTERY = register(
-            "copper_labradorite_battery",
-            (settings) -> new LabradoriteBatteryBlock(200, settings),
+    public static final Block LABRADORITE_GEODE = registerWithItem(
+            "labradorite_geode",
+            Block::new,
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.DIAMOND_BLUE)
+                    .strength(5.0F, 6.0F)
+                    .sounds(BlockSoundGroup.BASALT)
+                    .requiresTool()
+    );
+
+    public static final Block LABRASTEEL_BLOCK = registerWithItem(
+            "labrasteel_block",
+            Block::new,
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.LAPIS_BLUE)
+                    .strength(5.0F, 6.0F)
+                    .sounds(BlockSoundGroup.METAL)
+                    .requiresTool()
+    );
+
+    public static final Block COPPER_LABRASTEEL_BATTERY = registerWithItem(
+            "copper_labrasteel_battery",
+            (settings) -> new LabrasteelBatteryBlock(200, "copper", settings),
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.BLACK)
-                    .requiresTool()
                     .strength(3.0F, 6.0F)
                     .sounds(BlockSoundGroup.METAL)
+                    .requiresTool()
                     .nonOpaque()
-                    .solid(),
-            true
+                    .solid()
     );
 
-    public static final Block WIRE_CONNECTOR = register(
+    public static final Block IRON_LABRASTEEL_BATTERY = registerWithItem(
+            "iron_labrasteel_battery",
+            (settings) -> new LabrasteelBatteryBlock(500, "iron", settings),
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.BLACK)
+                    .strength(3.0F, 6.0F)
+                    .sounds(BlockSoundGroup.METAL)
+                    .requiresTool()
+                    .nonOpaque()
+                    .solid()
+    );
+
+    public static final Block WIRE_CONNECTOR = registerWithItem(
             "wire_connector",
             WireConnectorBlock::new,
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.IRON_GRAY)
-                    .requiresTool()
                     .strength(1.5F, 3.0F)
                     .sounds(BlockSoundGroup.METAL)
+                    .requiresTool()
                     .nonOpaque()
-                    .solid(),
-            true
+                    .solid()
     );
 
-    private static Block register(String name, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings, boolean shouldRegisterItem) {
+    private static Block register(String name, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings) {
         RegistryKey<Block> blockKey = keyOfBlock(name);
         Block block = blockFactory.apply(settings.registryKey(blockKey));
-        if (shouldRegisterItem) {
-            RegistryKey<Item> itemKey = keyOfItem(name);
-            BlockItem blockItem = new BlockItem(block, new Item.Settings().registryKey(itemKey).useBlockPrefixedTranslationKey());
-            Registry.register(Registries.ITEM, itemKey, blockItem);
-        }
+        return Registry.register(Registries.BLOCK, blockKey, block);
+    }
+
+    private static Block registerWithItem(String name, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings) {
+        RegistryKey<Block> blockKey = keyOfBlock(name);
+        Block block = blockFactory.apply(settings.registryKey(blockKey));
+
+        RegistryKey<Item> itemKey = keyOfItem(name);
+        BlockItem blockItem = new BlockItem(block, new Item.Settings().registryKey(itemKey).useBlockPrefixedTranslationKey());
+        Registry.register(Registries.ITEM, itemKey, blockItem);
+
         return Registry.register(Registries.BLOCK, blockKey, block);
     }
 
@@ -129,6 +158,6 @@ public class ModBlocks {
     }
 
     public static void init() {
-        if (!FabricLoader.getInstance().isModLoaded("continuity")) Stormsoul.LOGGER.warn("Stormsoul uses Continuity to display emissive textures for certain blocks. Installing Continuity may improve block visuals.");
+
     }
 }

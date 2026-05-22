@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0,
+      "functions": [
+        {
+          "function": "minecraft:copy_components",
+          "source": "block_entity",
+          "include": [
+            "stormsoul:stored_stormsoul"
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "stormsoul:iron_labrasteel_battery"
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "stormsoul:blocks/iron_labrasteel_battery"
+}

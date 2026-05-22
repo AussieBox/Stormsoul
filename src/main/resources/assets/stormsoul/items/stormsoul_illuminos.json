@@ -1,9 +1,22 @@
 {
   "model": {
-    "type": "minecraft:special",
-    "base": "stormsoul:item/stormsoul_illuminos",
-    "model": {
-      "type": "geckolib:geckolib"
-    }
+    "type": "minecraft:select",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "stormsoul:item/stormsoul_illuminos_gui"
+        },
+        "when": ["gui", "ground", "fixed"]
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:special",
+      "base": "stormsoul:item/stormsoul_illuminos",
+      "model": {
+        "type": "geckolib:geckolib"
+      }
+    },
+    "property": "minecraft:display_context"
   }
 }

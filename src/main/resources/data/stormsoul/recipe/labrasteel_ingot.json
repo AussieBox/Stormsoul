@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stormsoul:labradorite",
+    "stormsoul:labradorite",
+    "minecraft:iron_ingot",
+    "minecraft:netherite_scrap"
+  ],
+  "result": {
+    "id": "stormsoul:labrasteel_ingot"
+  }
+}

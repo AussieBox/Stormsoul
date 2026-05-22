@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stormsoul:labrasteel_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "stormsoul:labrasteel_ingot"
+  }
+}

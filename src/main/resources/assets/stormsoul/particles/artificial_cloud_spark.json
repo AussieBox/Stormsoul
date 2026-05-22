@@ -1,5 +1,11 @@
 {
   "textures": [
-    "stormsoul:artificial_cloud_spark"
+    "stormsoul:artificial_cloud_spark/artificial_cloud_spark1",
+    "stormsoul:artificial_cloud_spark/artificial_cloud_spark2",
+    "stormsoul:artificial_cloud_spark/artificial_cloud_spark3",
+    "stormsoul:artificial_cloud_spark/artificial_cloud_spark4",
+    "stormsoul:artificial_cloud_spark/artificial_cloud_spark5",
+    "stormsoul:artificial_cloud_spark/artificial_cloud_spark6",
+    "stormsoul:artificial_cloud_spark/artificial_cloud_spark7"
   ]
 }

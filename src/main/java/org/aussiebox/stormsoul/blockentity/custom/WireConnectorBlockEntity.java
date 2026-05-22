@@ -112,6 +112,8 @@ public class WireConnectorBlockEntity extends AbstractStormsoulBlockEntity {
 
     @Override
     protected void readData(ReadView tag) {
+        super.readData(tag);
+
         connectedTo = tag.read("connectedTo", Vec3d.CODEC);
         if (world != null && tag.contains("editor")) {
             Optional<UUID> optionalUUID = tag.read("editor", Uuids.CODEC);
@@ -131,6 +133,8 @@ public class WireConnectorBlockEntity extends AbstractStormsoulBlockEntity {
 
     @Override
     protected void writeData(WriteView tag) {
+        super.writeData(tag);
+
         connectedTo.ifPresent(vec3d -> tag.put("connectedTo", Vec3d.CODEC, vec3d));
         editor.ifPresent(playerEntity -> tag.put("editor", Uuids.CODEC, editor.get().getUuid()));
         wireType.ifPresent(type -> tag.put("wireType", StringIdentifiable.createCodec(WireType::values), type));

@@ -17,7 +17,7 @@ import net.minecraft.world.gen.feature.PlacedFeature;
 import org.aussiebox.stormsoul.block.ModBlocks;
 import org.aussiebox.stormsoul.blockentity.ModBlockEntities;
 import org.aussiebox.stormsoul.blockentity.custom.ArtificialCloudBlockEntity;
-import org.aussiebox.stormsoul.blockentity.custom.LabradoriteBatteryBlockEntity;
+import org.aussiebox.stormsoul.blockentity.custom.LabrasteelBatteryBlockEntity;
 import org.aussiebox.stormsoul.command.MainCommand;
 import org.aussiebox.stormsoul.component.ModDataComponentTypes;
 import org.aussiebox.stormsoul.item.ModItems;
@@ -42,6 +42,7 @@ public class Stormsoul implements ModInitializer {
 
     public static final SimpleParticleType ARTIFICIAL_CLOUD_SPARK = FabricParticleTypes.simple();
     public static final SimpleParticleType STORMSOUL_SPARK = FabricParticleTypes.simple();
+    public static final SimpleParticleType SURGE_TRAIL = FabricParticleTypes.simple();
 
     public static final RegistryKey<PlacedFeature> LABRADORITE_ORE_PLACED_KEY = RegistryKey.of(RegistryKeys.PLACED_FEATURE, id("ore_labradorite"));
     public static final RegistryKey<PlacedFeature> LABRADORITE_ORE_BURIED_PLACED_KEY = RegistryKey.of(RegistryKeys.PLACED_FEATURE, id("ore_labradorite_buried"));
@@ -63,6 +64,7 @@ public class Stormsoul implements ModInitializer {
 
         Registry.register(Registries.PARTICLE_TYPE, id("artificial_cloud_spark"), ARTIFICIAL_CLOUD_SPARK);
         Registry.register(Registries.PARTICLE_TYPE, id("stormsoul_spark"), STORMSOUL_SPARK);
+        Registry.register(Registries.PARTICLE_TYPE, id("surge_trail"), SURGE_TRAIL);
 
         BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, LABRADORITE_ORE_PLACED_KEY);
         BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, LABRADORITE_ORE_BURIED_PLACED_KEY);
@@ -73,7 +75,7 @@ public class Stormsoul implements ModInitializer {
             MainCommand.register(dispatcher);
         }));
 
-        MolangQueries.<LabradoriteBatteryBlockEntity>setActorVariable("query.stormsoul_capacity_percentage", actor -> 1-(actor.animatable().getStoredStormsoul()/actor.animatable().getMaxStoredStormsoul()));
+        MolangQueries.<LabrasteelBatteryBlockEntity>setActorVariable("query.stormsoul_capacity_percentage", actor -> 1-(actor.animatable().getStoredStormsoul()/actor.animatable().getMaxStoredStormsoul()));
 
         LOGGER.info("Common initialisation complete, enjoy!");
     }

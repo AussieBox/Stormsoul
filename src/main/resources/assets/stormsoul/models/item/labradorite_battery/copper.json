@@ -1,6 +1,0 @@
-{
-  "parent": "stormsoul:item/labradorite_battery/base",
-  "textures": {
-    "layer1": "stormsoul:item/labradorite_battery/copper"
-  }
-}

@@ -21,13 +21,13 @@
       "org.aussiebox.stormsoul.StormsoulComponents"
     ],
     "jade": [
-      "org.aussiebox.stormsoul.client.jade.JadePluginHandler"
+      "org.aussiebox.stormsoul.client.compat.jade.JadePluginHandler"
     ],
     "rei_client": [
-      "org.aussiebox.stormsoul.client.rei.ModREIClientPlugin"
+      "org.aussiebox.stormsoul.client.compat.rei.ModREIClientPlugin"
     ],
     "rei_common": [
-      "org.aussiebox.stormsoul.rei.ModREIPlugin"
+      "org.aussiebox.stormsoul.compat.rei.ModREIPlugin"
     ]
   },
   "custom": {
@@ -51,8 +51,5 @@
     "cardinal-components-entity": ">=${cca_version}",
     "cardinal-components-world": ">=${cca_version}",
     "geckolib": ">=${geckolib_version}"
-  },
-  "recommends": {
-    "continuity": "3.0.1-beta.1+1.21.6"
   }
 }

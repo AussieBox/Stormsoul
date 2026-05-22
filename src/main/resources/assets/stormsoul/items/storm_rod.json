@@ -1,6 +1,9 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "stormsoul:block/storm_rod"
+    "type": "minecraft:special",
+    "base": "stormsoul:block/storm_rod",
+    "model": {
+      "type": "geckolib:geckolib"
+    }
   }
 }

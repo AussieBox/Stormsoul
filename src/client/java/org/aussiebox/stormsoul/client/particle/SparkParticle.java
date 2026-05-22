@@ -11,24 +11,31 @@ import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.util.Colors;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Random;
+
 public class SparkParticle extends AnimatedParticle {
-    private final SpriteProvider sprites;
+    public static final Random sparkRandom = new Random();
+    private final boolean fallLeft;
 
     protected SparkParticle(ClientWorld clientWorld, double x, double y, double z, SpriteProvider sprites) {
         super(clientWorld, x, y, z, sprites, 0.0125F);
-        this.sprites = sprites;
         this.velocityMultiplier = 0.9F;
         this.maxAge = 20 + random.nextBetween(0, 20);
-        this.angle = random.nextBetween(-45, 45);
+        this.lastAngle = sparkRandom.nextFloat(-0.225F, 0.225F);
+        this.angle = this.lastAngle;
+        this.scale = sparkRandom.nextFloat(0.08F, 0.12F);
         this.setTargetColor(Colors.WHITE);
-        this.setSprite(spriteProvider.getSprite(random));
+        fallLeft = random.nextBoolean();
+        setSpriteForAge(sprites);
     }
 
     @Override
     public void tick() {
-        if (this.age++ >= this.maxAge)
-            this.markDead();
-        this.angle += 0.01F;
+        super.tick();
+        this.lastAngle = this.angle;
+        if (fallLeft) this.angle -= 0.01F;
+        else this.angle += 0.01F;
+        this.scale -= 0.0025F;
     }
 
     @Environment(EnvType.CLIENT)

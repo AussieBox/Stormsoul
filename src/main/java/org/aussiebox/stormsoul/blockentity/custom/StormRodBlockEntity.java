@@ -8,6 +8,7 @@ import net.minecraft.storage.WriteView;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
+import org.aussiebox.stormsoul.Stormsoul;
 import org.aussiebox.stormsoul.block.ModBlocks;
 import org.aussiebox.stormsoul.block.custom.ArtificialCloudBlock;
 import org.aussiebox.stormsoul.block.custom.StormRodBlock;
@@ -21,9 +22,11 @@ import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.Optional;
+import java.util.Random;
 
 public class StormRodBlockEntity extends AbstractStormsoulBlockEntity implements GeoBlockEntity {
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
+    public static final Random random = new Random();
 
     @Getter private boolean isActive;
     @Getter private boolean struck;
@@ -55,7 +58,17 @@ public class StormRodBlockEntity extends AbstractStormsoulBlockEntity implements
         stormEntity.isActive = setActiveTo;
         stormEntity.struck = setStruckTo;
 
-        if (stormEntity.struck) stormEntity.addStored(1);
+        if (stormEntity.struck) {
+            stormEntity.addStored(1);
+            if (random.nextInt(0, 4) == 0)
+                world.addParticleClient(
+                        Stormsoul.STORMSOUL_SPARK,
+                        pos.toCenterPos().getX() + random.nextDouble(-0.5, 0.5),
+                        pos.toCenterPos().getY() + random.nextDouble(-0.5, 0.5),
+                        pos.toCenterPos().getZ() + random.nextDouble(-0.5, 0.5),
+                        0, 0, 0
+                );
+        }
         stormEntity.markDirty();
     }
 
@@ -75,12 +88,16 @@ public class StormRodBlockEntity extends AbstractStormsoulBlockEntity implements
 
     @Override
     protected void readData(ReadView tag) {
+        super.readData(tag);
+
         isActive = tag.getBoolean("isActive", false);
         struck = tag.getBoolean("struck", false);
     }
 
     @Override
     protected void writeData(WriteView tag) {
+        super.writeData(tag);
+
         tag.putBoolean("isActive", isActive);
         tag.putBoolean("struck", struck);
     }

@@ -1,5 +1,11 @@
 {
   "textures": [
-    "stormsoul:stormsoul_spark"
+    "stormsoul:stormsoul_spark/stormsoul_spark1",
+    "stormsoul:stormsoul_spark/stormsoul_spark2",
+    "stormsoul:stormsoul_spark/stormsoul_spark3",
+    "stormsoul:stormsoul_spark/stormsoul_spark4",
+    "stormsoul:stormsoul_spark/stormsoul_spark5",
+    "stormsoul:stormsoul_spark/stormsoul_spark6",
+    "stormsoul:stormsoul_spark/stormsoul_spark7"
   ]
 }

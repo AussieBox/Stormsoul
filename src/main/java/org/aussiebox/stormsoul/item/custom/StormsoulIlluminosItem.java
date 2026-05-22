@@ -1,9 +1,14 @@
 package org.aussiebox.stormsoul.item.custom;
 
 import com.llamalad7.mixinextras.lib.apache.commons.mutable.MutableObject;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
+import org.aussiebox.stormsoul.Stormsoul;
+import org.aussiebox.stormsoul.cca.PlayerComponent;
+import org.aussiebox.stormsoul.component.ModDataComponentTypes;
 import org.aussiebox.stormsoul.util.StormsoulUtil;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.client.GeoRenderProvider;
@@ -35,6 +40,18 @@ public class StormsoulIlluminosItem extends Item implements GeoItem {
     @Override
     public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
         consumer.accept(this.geoRenderProvider.getValue());
+    }
+
+    @Override
+    public void postDamageEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        stack.set(ModDataComponentTypes.HITS_SINCE_SURGE, stack.getOrDefault(ModDataComponentTypes.HITS_SINCE_SURGE, 0) + 1);
+        Stormsoul.LOGGER.info(stack.getOrDefault(ModDataComponentTypes.HITS_SINCE_SURGE, 0).toString());
+        if (stack.getOrDefault(ModDataComponentTypes.HITS_SINCE_SURGE, 0) >= 10) {
+            if (!(attacker instanceof PlayerEntity player)) return;
+            stack.set(ModDataComponentTypes.HITS_SINCE_SURGE, 0);
+            PlayerComponent component = PlayerComponent.KEY.get(player);
+            component.startSurge();
+        }
     }
 
     @Override

@@ -2,15 +2,20 @@
   "itemGroup.stormsoul.stormsoul": "Stormsoul",
 
   "item.stormsoul.labradorite": "Labradorite",
+  "item.stormsoul.labrasteel_ingot": "Labrasteel Ingot",
   "item.stormsoul.stormsoul_illuminos": "Stormsoul Illuminos",
   "item.stormsoul.copper_wire_spool": "Spool of Copper Wire",
+  "item.stormsoul.iron_wire_spool": "Spool of Iron Wire",
 
   "block.stormsoul.storm_rod": "Storm Rod",
   "block.stormsoul.artificial_cloud": "Artificial Cloud",
   "block.stormsoul.labradorite_ore": "Labradorite Ore",
   "block.stormsoul.deepslate_labradorite_ore": "Deepslate Labradorite Ore",
   "block.stormsoul.labradorite_block": "Labradorite Block",
-  "block.stormsoul.copper_labradorite_battery": "Copper Labradorite Battery",
+  "block.stormsoul.labradorite_geode": "Labradorite Geode",
+  "block.stormsoul.labrasteel_block": "Labrasteel Block",
+  "block.stormsoul.copper_labrasteel_battery": "Copper Labrasteel Battery",
+  "block.stormsoul.iron_labrasteel_battery": "Iron Labrasteel Battery",
   "block.stormsoul.wire_connector": "Wire Connector",
 
   "tooltip.stormsoul.stored_stormsoul": "Stormsoul: %s/%s",

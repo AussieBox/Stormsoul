@@ -24,6 +24,12 @@
 						"vector": ["1+(math.sin(query.anim_time*50)*0.05)", "1+(math.sin(query.anim_time*50)*0.05)", "1+(math.sin(query.anim_time*50)*0.05)"]
 					}
 				}
+			},
+			"particle_effects": {
+				"0.0": {
+					"effect": "stormsoul:stormsoul_spark",
+					"locator": "cube_particle"
+				}
 			}
 		}
 	}
