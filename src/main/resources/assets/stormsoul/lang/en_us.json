@@ -29,6 +29,7 @@
   "block.property.boolean.false": "false",
 
   "subtitles.stormsoul.block.wire_connector.violent_disconnect": "Wire violently disconnects",
+  "subtitles.stormsoul.item.stormsoul_illuminos.surge_start": "Weapon surges",
 
   "death.attack.energy_transmission": "%s's head was the most efficient connection",
   "death.attack.zipline_fall": "%s was the weakest link",

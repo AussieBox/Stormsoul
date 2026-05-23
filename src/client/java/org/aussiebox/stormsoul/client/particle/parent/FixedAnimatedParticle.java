@@ -6,13 +6,20 @@ import net.minecraft.client.world.ClientWorld;
 
 public class FixedAnimatedParticle extends FixedParticle {
     protected final SpriteProvider spriteProvider;
-    private float targetRed;
-    private float targetGreen;
-    private float targetBlue;
-    private boolean changesColor;
+    protected float targetRed;
+    protected float targetGreen;
+    protected float targetBlue;
+    protected boolean changesColor;
 
     protected FixedAnimatedParticle(ClientWorld world, double x, double y, double z, SpriteProvider spriteProvider, float upwardsAcceleration) {
         super(world, x, y, z);
+        this.velocityMultiplier = 0.91F;
+        this.gravityStrength = upwardsAcceleration;
+        this.spriteProvider = spriteProvider;
+    }
+
+    protected FixedAnimatedParticle(ClientWorld world, double x, double y, double z, double pitch, double yaw, SpriteProvider spriteProvider, float upwardsAcceleration) {
+        super(world, x, y, z, pitch, yaw);
         this.velocityMultiplier = 0.91F;
         this.gravityStrength = upwardsAcceleration;
         this.spriteProvider = spriteProvider;

@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
+import net.minecraft.particle.ParticleType;
 import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -21,6 +22,7 @@ import org.aussiebox.stormsoul.blockentity.custom.LabrasteelBatteryBlockEntity;
 import org.aussiebox.stormsoul.command.MainCommand;
 import org.aussiebox.stormsoul.component.ModDataComponentTypes;
 import org.aussiebox.stormsoul.item.ModItems;
+import org.aussiebox.stormsoul.particle.type.PlayerAnchorParticleType;
 import org.aussiebox.stormsoul.recipe.ModRecipes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +44,7 @@ public class Stormsoul implements ModInitializer {
 
     public static final SimpleParticleType ARTIFICIAL_CLOUD_SPARK = FabricParticleTypes.simple();
     public static final SimpleParticleType STORMSOUL_SPARK = FabricParticleTypes.simple();
-    public static final SimpleParticleType SURGE_TRAIL = FabricParticleTypes.simple();
+    public static final ParticleType<PlayerAnchorParticleType> SURGE_TRAIL = FabricParticleTypes.complex(PlayerAnchorParticleType::createCodec, PlayerAnchorParticleType::createPacketCodec);
 
     public static final RegistryKey<PlacedFeature> LABRADORITE_ORE_PLACED_KEY = RegistryKey.of(RegistryKeys.PLACED_FEATURE, id("ore_labradorite"));
     public static final RegistryKey<PlacedFeature> LABRADORITE_ORE_BURIED_PLACED_KEY = RegistryKey.of(RegistryKeys.PLACED_FEATURE, id("ore_labradorite_buried"));

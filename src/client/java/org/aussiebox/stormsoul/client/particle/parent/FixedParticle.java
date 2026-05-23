@@ -1,5 +1,7 @@
 package org.aussiebox.stormsoul.client.particle.parent;
 
+import lombok.Getter;
+import lombok.Setter;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.render.Camera;
@@ -13,25 +15,47 @@ import org.joml.Vector3f;
 public abstract class FixedParticle extends Particle {
     protected float scale = 0.1F * (this.random.nextFloat() * 0.5F + 0.5F) * 2.0F;
     protected Sprite sprite;
+    @Getter @Setter protected double pitch;
+    @Getter @Setter protected double yaw;
 
-    protected FixedParticle(ClientWorld clientWorld, double d, double e, double f) {
-        super(clientWorld, d, e, f);
+    protected FixedParticle(ClientWorld clientWorld, double x, double y, double z) {
+        super(clientWorld, x, y, z);
+        this.pitch = 0;
+        this.yaw = 0;
     }
 
-    protected FixedParticle(ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-        super(clientWorld, d, e, f, g, h, i);
+    protected FixedParticle(ClientWorld clientWorld, double x, double y, double z, double velX, double velY, double velZ) {
+        super(clientWorld, x, y, z, velX, velY, velZ);
+        this.pitch = 0;
+        this.yaw = 0;
+    }
+
+    protected FixedParticle(ClientWorld clientWorld, double x, double y, double z, double pitch, double yaw) {
+        super(clientWorld, x, y, z);
+        this.pitch = pitch;
+        this.yaw = yaw;
+    }
+
+    protected FixedParticle(ClientWorld clientWorld, double x, double y, double z, double velX, double velY, double velZ, double pitch, double yaw) {
+        super(clientWorld, x, y, z, velX, velY, velZ);
+        this.pitch = pitch;
+        this.yaw = yaw;
     }
 
     @Override
     public void render(VertexConsumer vertexConsumer, Camera camera, float tickProgress) {
         Quaternionf quaternionf = new Quaternionf();
+        quaternionf.rotateY((float) Math.toRadians(-this.yaw));
+        quaternionf.rotateZ((float) Math.toRadians((float) this.pitch));
+
         if (this.angle != 0.0F) {
             quaternionf.rotateZ(MathHelper.lerp(tickProgress, this.lastAngle, this.angle));
         }
 
-        float x = (float) ((float) MathHelper.lerp(tickProgress, this.lastX, this.x) - camera.getPos().getX());
-        float y = (float) ((float) MathHelper.lerp(tickProgress, this.lastY, this.y) - camera.getPos().getY());
-        float z = (float) ((float) MathHelper.lerp(tickProgress, this.lastZ, this.z) - camera.getPos().getZ());
+        float x = (float) (MathHelper.lerp(tickProgress, this.lastX, this.x) - camera.getPos().getX());
+        float y = (float) (MathHelper.lerp(tickProgress, this.lastY, this.y) - camera.getPos().getY());
+        float z = (float) (MathHelper.lerp(tickProgress, this.lastZ, this.z) - camera.getPos().getZ());
+
         this.render(vertexConsumer, quaternionf, x, y, z, tickProgress);
     }
 
@@ -46,6 +70,11 @@ public abstract class FixedParticle extends Particle {
         this.renderVertex(vertexConsumer, quaternionf, x, y, z, 1.0F, 1.0F, f, h, i, k);
         this.renderVertex(vertexConsumer, quaternionf, x, y, z, -1.0F, 1.0F, f, g, i, k);
         this.renderVertex(vertexConsumer, quaternionf, x, y, z, -1.0F, -1.0F, f, g, j, k);
+
+        this.renderVertex(vertexConsumer, quaternionf, x, y, z, -1.0F, -1.0F, f, g, j, k);
+        this.renderVertex(vertexConsumer, quaternionf, x, y, z, -1.0F, 1.0F, f, g, i, k);
+        this.renderVertex(vertexConsumer, quaternionf, x, y, z, 1.0F, 1.0F, f, h, i, k);
+        this.renderVertex(vertexConsumer, quaternionf, x, y, z, 1.0F, -1.0F, f, h, j, k);
     }
 
     private void renderVertex(

@@ -4,5 +4,16 @@
       "stormsoul:wire_violent_disconnect"
     ],
     "subtitle": "subtitles.stormsoul.block.wire_connector.violent_disconnect"
+  },
+  "item.stormsoul_illuminos.surge_start": {
+    "sounds": [
+      "stormsoul:stormsoul_illuminos_surge_start"
+    ],
+    "subtitle": "subtitles.stormsoul.item.stormsoul_illuminos.surge_start"
+  },
+  "item.stormsoul_illuminos.surge": {
+    "sounds": [
+      "stormsoul:stormsoul_illuminos_surge"
+    ]
   }
 }

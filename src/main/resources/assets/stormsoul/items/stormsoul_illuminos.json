@@ -7,7 +7,7 @@
           "type": "minecraft:model",
           "model": "stormsoul:item/stormsoul_illuminos_gui"
         },
-        "when": ["gui", "ground", "fixed"]
+        "when": ["gui"]
       }
     ],
     "fallback": {

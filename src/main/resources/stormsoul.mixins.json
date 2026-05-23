@@ -4,7 +4,9 @@
   "package": "org.aussiebox.stormsoul.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "LightningEntityMixin"
+    "LightningEntityMixin",
+    "PlayerInventoryMixin",
+    "ServerPlayNetworkHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

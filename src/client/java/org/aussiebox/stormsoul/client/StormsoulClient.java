@@ -3,14 +3,19 @@ package org.aussiebox.stormsoul.client;
 import com.google.common.base.Suppliers;
 import com.zigythebird.playeranim.animation.PlayerAnimationController;
 import com.zigythebird.playeranim.animation.PlayerRawAnimationBuilder;
+import com.zigythebird.playeranim.api.PlayerAnimationAccess;
 import com.zigythebird.playeranim.api.PlayerAnimationFactory;
+import com.zigythebird.playeranimcore.animation.layered.IAnimation;
+import com.zigythebird.playeranimcore.api.firstPerson.FirstPersonMode;
 import com.zigythebird.playeranimcore.enums.PlayState;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.minecraft.client.render.BlockRenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
+import net.minecraft.util.Arm;
 import org.aussiebox.stormsoul.Stormsoul;
 import org.aussiebox.stormsoul.StormsoulAnimations;
 import org.aussiebox.stormsoul.block.ModBlocks;
@@ -75,13 +80,43 @@ public class StormsoulClient implements ClientModInitializer {
         });
 
         PlayerAnimationFactory.ANIMATION_DATA_FACTORY.registerFactory(StormsoulAnimations.STORMSOUL_ILLUMINOS, 1500,
-                player -> new PlayerAnimationController(player, (controller, state, animSetter) -> {
-                    PlayerComponent component = PlayerComponent.KEY.get(player);
-                    if (component.getIlluminosSurgeTicks() == 0) return PlayState.STOP;
-                    Stormsoul.LOGGER.info("off you go :3c");
-                    if (player.getOffHandStack().isOf(ModItems.STORMSOUL_ILLUMINOS)) return animSetter.setAnimation(PlayerRawAnimationBuilder.begin().thenLoop(StormsoulAnimations.STORMSOUL_ILLUMINOS_SURGE_LEFT).build());
-                    else return animSetter.setAnimation(PlayerRawAnimationBuilder.begin().thenLoop(StormsoulAnimations.STORMSOUL_ILLUMINOS_SURGE_RIGHT).build());
-                })
+                player -> new PlayerAnimationController(player,
+                        (controller, state, animSetter) -> PlayState.STOP
+                )
         );
+
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            if (client.player == null) return;
+            PlayerComponent component = PlayerComponent.KEY.get(client.player);
+            PlayerAnimationController controller = (PlayerAnimationController) PlayerAnimationAccess.getPlayerAnimationLayer(client.player, StormsoulAnimations.STORMSOUL_ILLUMINOS);
+            if (controller == null) return;
+
+            controller.setFirstPersonMode(FirstPersonMode.THIRD_PERSON_MODEL);
+            if (component.getIlluminosSurgeTicks() == 0) controller.stopTriggeredAnimation();
+            else {
+                if (!controller.isPlayingTriggeredAnimation()) {
+                    if (client.player.getOffHandStack().isOf(ModItems.STORMSOUL_ILLUMINOS)) {
+                        if (client.player.getMainArm() == Arm.RIGHT) {
+                            controller.setFirstPersonConfiguration(IAnimation.DEFAULT_FIRST_PERSON_CONFIG.setShowLeftArm(true).setShowRightArm(false));
+                            controller.triggerAnimation(PlayerRawAnimationBuilder.begin().thenLoop(StormsoulAnimations.STORMSOUL_ILLUMINOS_SURGE_LEFT).build());
+                        } else {
+                            controller.setFirstPersonConfiguration(IAnimation.DEFAULT_FIRST_PERSON_CONFIG.setShowRightArm(true).setShowLeftArm(false));
+                            controller.triggerAnimation(PlayerRawAnimationBuilder.begin().thenLoop(StormsoulAnimations.STORMSOUL_ILLUMINOS_SURGE_RIGHT).build());
+                        }
+                    }
+                    else {
+                        if (client.player.getMainArm() == Arm.RIGHT) {
+                            controller.setFirstPersonConfiguration(IAnimation.DEFAULT_FIRST_PERSON_CONFIG.setShowRightArm(true).setShowLeftArm(false));
+                            controller.triggerAnimation(PlayerRawAnimationBuilder.begin().thenLoop(StormsoulAnimations.STORMSOUL_ILLUMINOS_SURGE_RIGHT).build());
+                        } else {
+                            controller.setFirstPersonConfiguration(IAnimation.DEFAULT_FIRST_PERSON_CONFIG.setShowLeftArm(true).setShowRightArm(false));
+                            controller.triggerAnimation(PlayerRawAnimationBuilder.begin().thenLoop(StormsoulAnimations.STORMSOUL_ILLUMINOS_SURGE_LEFT).build());
+                        }
+                    }
+                }
+                client.player.setBodyYaw(client.player.getYaw(client.getRenderTickCounter().getTickProgress(true)));
+                client.player.setHeadYaw(client.player.getBodyYaw());
+            }
+        });
     }
 }

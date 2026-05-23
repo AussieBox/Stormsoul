@@ -5,6 +5,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Pair;
+import net.minecraft.util.math.Vec2f;
+import net.minecraft.util.math.Vec3d;
 import org.apache.commons.lang3.mutable.MutableInt;
 
 import java.util.ArrayList;
@@ -67,6 +69,19 @@ public class StormsoulUtil {
         int g = (int)((float)g1 + (float)(g2 - g1) * progress);
         int b = (int)((float)b1 + (float)(b2 - b1) * progress);
         return (r << 16) + (g << 8) + b;
+    }
+
+    public static Vec2f faceVecToVec(Vec3d source, Vec3d target) {
+        double diffX = target.x - source.x;
+        double diffY = target.y - source.y;
+        double diffZ = target.z - source.z;
+
+        double distanceXZ = Math.sqrt(diffX * diffX + diffZ * diffZ);
+
+        float yaw = (float) (Math.toDegrees(Math.atan2(diffZ, diffX)) - 90F);
+        float pitch = (float) (-Math.toDegrees(Math.atan2(diffY, distanceXZ)));
+
+        return new Vec2f(pitch, yaw);
     }
 
 }
