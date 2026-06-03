@@ -7,6 +7,7 @@
     "stormsoul:labradorite_block",
     "stormsoul:labradorite_geode",
     "stormsoul:labrasteel_block",
-    "#stormsoul:batteries"
+    "#stormsoul:batteries",
+    "stormsoul:labrasteel_charger"
   ]
 }

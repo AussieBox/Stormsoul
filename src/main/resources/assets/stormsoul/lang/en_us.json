@@ -6,6 +6,9 @@
   "item.stormsoul.stormsoul_illuminos": "Stormsoul Illuminos",
   "item.stormsoul.copper_wire_spool": "Spool of Copper Wire",
   "item.stormsoul.iron_wire_spool": "Spool of Iron Wire",
+  "item.stormsoul.impure_raw_silver": "Impure Raw Silver",
+  "item.stormsoul.pure_raw_silver": "Pure Raw Silver",
+  "item.stormsoul.silver_ingot": "Silver Ingot",
 
   "block.stormsoul.storm_rod": "Storm Rod",
   "block.stormsoul.artificial_cloud": "Artificial Cloud",
@@ -14,9 +17,16 @@
   "block.stormsoul.labradorite_block": "Labradorite Block",
   "block.stormsoul.labradorite_geode": "Labradorite Geode",
   "block.stormsoul.labrasteel_block": "Labrasteel Block",
+  "block.stormsoul.smooth_labrasteel_block": "Smooth Labrasteel Block",
   "block.stormsoul.copper_labrasteel_battery": "Copper Labrasteel Battery",
   "block.stormsoul.iron_labrasteel_battery": "Iron Labrasteel Battery",
   "block.stormsoul.wire_connector": "Wire Connector",
+  "block.stormsoul.silver_ore": "Silver Ore",
+  "block.stormsoul.deepslate_silver_ore": "Deepslate Silver Ore",
+  "block.stormsoul.impure_raw_silver_block": "Block of Impure Raw Silver",
+  "block.stormsoul.pure_raw_silver_block": "Block of Pure Raw Silver",
+  "block.stormsoul.silver_casing": "Silver Casing",
+  "block.stormsoul.labrasteel_charger": "Labrasteel Charger",
 
   "tooltip.stormsoul.stored_stormsoul": "Stormsoul: %s/%s",
 

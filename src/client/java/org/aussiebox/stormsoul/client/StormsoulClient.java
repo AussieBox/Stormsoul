@@ -15,16 +15,22 @@ import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.minecraft.client.render.BlockRenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
+import net.minecraft.client.sound.EntityTrackingSoundInstance;
+import net.minecraft.client.sound.SoundInstance;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.Arm;
 import org.aussiebox.stormsoul.Stormsoul;
 import org.aussiebox.stormsoul.StormsoulAnimations;
 import org.aussiebox.stormsoul.block.ModBlocks;
 import org.aussiebox.stormsoul.blockentity.ModBlockEntities;
 import org.aussiebox.stormsoul.cca.PlayerComponent;
-import org.aussiebox.stormsoul.client.geckolib.renderer.LabrasteelBatteryRenderer;
-import org.aussiebox.stormsoul.client.geckolib.renderer.StormRodRenderer;
-import org.aussiebox.stormsoul.client.geckolib.renderer.StormsoulIlluminosRenderer;
+import org.aussiebox.stormsoul.client.geckolib.renderer.*;
+import org.aussiebox.stormsoul.client.geckolib.renderer.item.ConnectedCasingItemRenderer;
+import org.aussiebox.stormsoul.client.geckolib.renderer.item.LabrasteelChargerItemRenderer;
 import org.aussiebox.stormsoul.client.geckolib.renderer.item.StormRodItemRenderer;
+import org.aussiebox.stormsoul.client.mixin.accessor.EntityTrackingSoundInstanceAccessor;
+import org.aussiebox.stormsoul.client.mixin.accessor.SoundManagerAccessor;
+import org.aussiebox.stormsoul.client.mixin.accessor.SoundSystemAccessor;
 import org.aussiebox.stormsoul.client.model.ArtificialCloudModel;
 import org.aussiebox.stormsoul.client.particle.SparkParticle;
 import org.aussiebox.stormsoul.client.particle.SurgeTrailParticle;
@@ -32,6 +38,8 @@ import org.aussiebox.stormsoul.client.render.blockentity.ArtificialCloudBlockEnt
 import org.aussiebox.stormsoul.client.render.blockentity.WireConnectorBlockEntityRenderer;
 import org.aussiebox.stormsoul.item.ModItems;
 import org.aussiebox.stormsoul.item.custom.StormsoulIlluminosItem;
+import org.aussiebox.stormsoul.item.custom.geckolib.ConnectedCasingItem;
+import org.aussiebox.stormsoul.item.custom.geckolib.LabrasteelChargerItem;
 import org.aussiebox.stormsoul.item.custom.geckolib.StormRodItem;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.client.GeoRenderProvider;
@@ -47,13 +55,16 @@ public class StormsoulClient implements ClientModInitializer {
                 ModBlocks.ARTIFICIAL_CLOUD,
                 ModBlocks.STORM_ROD,
                 ModBlocks.COPPER_LABRASTEEL_BATTERY,
-                ModBlocks.IRON_LABRASTEEL_BATTERY
+                ModBlocks.IRON_LABRASTEEL_BATTERY,
+                ModBlocks.LABRASTEEL_CHARGER
         );
 
         BlockEntityRendererFactories.register(ModBlockEntities.ARTIFICIAL_CLOUD_BLOCK_ENTITY, ArtificialCloudBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntities.STORM_ROD_BLOCK_ENTITY, (context) -> new StormRodRenderer());
         BlockEntityRendererFactories.register(ModBlockEntities.LABRASTEEL_BATTERY_BLOCK_ENTITY, (context) -> new LabrasteelBatteryRenderer());
         BlockEntityRendererFactories.register(ModBlockEntities.WIRE_CONNECTOR_BLOCK_ENTITY, WireConnectorBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntities.LABRASTEEL_CHARGER_BLOCK_ENTITY, (context) -> new LabrasteelChargerRenderer());
+        BlockEntityRendererFactories.register(ModBlockEntities.CONNECTED_CASING_BLOCK_ENTITY, (context) -> new ConnectedCasingRenderer());
 
         EntityModelLayerRegistry.registerModelLayer(ArtificialCloudModel.LAYER, ArtificialCloudModel::getTexturedModelData);
 
@@ -79,6 +90,24 @@ public class StormsoulClient implements ClientModInitializer {
             }
         });
 
+        ModItems.LABRASTEEL_CHARGER.geoRenderProvider.setValue(new GeoRenderProvider() {
+            private final Supplier<GeoItemRenderer<LabrasteelChargerItem>> renderer = Suppliers.memoize(LabrasteelChargerItemRenderer::new);
+
+            @Override
+            public @Nullable GeoItemRenderer<LabrasteelChargerItem> getGeoItemRenderer() {
+                return this.renderer.get();
+            }
+        });
+
+        ModItems.SILVER_CASING.geoRenderProvider.setValue(new GeoRenderProvider() {
+            private final Supplier<GeoItemRenderer<ConnectedCasingItem>> renderer = Suppliers.memoize(() -> new ConnectedCasingItemRenderer(Stormsoul.id("textures/block/silver_casing.png")));
+
+            @Override
+            public @Nullable GeoItemRenderer<ConnectedCasingItem> getGeoItemRenderer() {
+                return this.renderer.get();
+            }
+        });
+
         PlayerAnimationFactory.ANIMATION_DATA_FACTORY.registerFactory(StormsoulAnimations.STORMSOUL_ILLUMINOS, 1500,
                 player -> new PlayerAnimationController(player,
                         (controller, state, animSetter) -> PlayState.STOP
@@ -92,7 +121,21 @@ public class StormsoulClient implements ClientModInitializer {
             if (controller == null) return;
 
             controller.setFirstPersonMode(FirstPersonMode.THIRD_PERSON_MODEL);
-            if (component.getIlluminosSurgeTicks() == 0) controller.stopTriggeredAnimation();
+            if (component.getIlluminosSurgeTicks() == 0) {
+                controller.stopTriggeredAnimation();
+
+                SoundManagerAccessor manager = (SoundManagerAccessor) client.getSoundManager();
+                SoundSystemAccessor system = (SoundSystemAccessor) manager.getSoundSystem();
+                for (SoundInstance sound : system.getSources().keySet()) {
+                    if (sound instanceof EntityTrackingSoundInstance trackingSound) {
+                        Entity entity = ((EntityTrackingSoundInstanceAccessor) trackingSound).getTrackedEntity();
+                        if (entity == client.player && trackingSound.getId().getPath().equals("item.stormsoul_illuminos.surge")) {
+                            client.getSoundManager().stop(trackingSound);
+                            break;
+                        }
+                    }
+                }
+            }
             else {
                 if (!controller.isPlayingTriggeredAnimation()) {
                     if (client.player.getOffHandStack().isOf(ModItems.STORMSOUL_ILLUMINOS)) {

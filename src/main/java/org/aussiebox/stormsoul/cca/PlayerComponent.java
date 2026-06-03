@@ -3,6 +3,8 @@ package org.aussiebox.stormsoul.cca;
 import lombok.Getter;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.storage.ReadView;
 import net.minecraft.storage.WriteView;
 import net.minecraft.util.math.Vec3d;
@@ -27,8 +29,14 @@ public class PlayerComponent implements AutoSyncedComponent, ServerTickingCompon
     }
 
     public void startSurge() {
+        if (player.getWorld() == null) return;
+
         illuminosSurgeTicks = 120;
         lastParticlePos = Vec3d.ZERO;
+
+        player.getWorld().playSoundFromEntity(null, player, SoundEvent.of(Stormsoul.id("item.stormsoul_illuminos.surge_start")), SoundCategory.PLAYERS, 1, 1);
+        player.getWorld().playSoundFromEntity(null, player, SoundEvent.of(Stormsoul.id("item.stormsoul_illuminos.surge")), SoundCategory.PLAYERS, 0.5F, 1);
+
         sync();
     }
 

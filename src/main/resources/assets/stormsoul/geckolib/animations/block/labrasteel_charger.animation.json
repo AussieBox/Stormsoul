@@ -1,0 +1,36 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"spin": {
+			"loop": true,
+			"bones": {
+				"prongs": {
+					"rotation": {
+						"vector": [0, "-query.anim_time*100", 0]
+					}
+				},
+				"west": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					}
+				}
+			}
+		},
+		"energy_ring": {
+			"loop": true,
+			"animation_length": 1,
+			"bones": {
+				"energy_ring": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"1.0": {
+							"vector": [0, 5, 0]
+						}
+					}
+				}
+			}
+		}
+	}
+}

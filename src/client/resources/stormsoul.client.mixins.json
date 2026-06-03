@@ -4,8 +4,12 @@
   "package": "org.aussiebox.stormsoul.client.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
+    "ClientPlayerEntityMixin",
     "InGameHudMixin",
-    "MinecraftClientMixin"
+    "MinecraftClientMixin",
+    "accessor.EntityTrackingSoundInstanceAccessor",
+    "accessor.SoundManagerAccessor",
+    "accessor.SoundSystemAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

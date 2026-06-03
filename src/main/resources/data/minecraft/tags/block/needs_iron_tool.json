@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "stormsoul:silver_ore",
+    "stormsoul:deepslate_silver_ore",
+    "stormsoul:impure_raw_silver_block",
+    "stormsoul:pure_raw_silver_block"
+  ]
+}

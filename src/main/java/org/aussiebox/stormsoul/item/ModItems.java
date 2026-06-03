@@ -17,6 +17,8 @@ import org.aussiebox.stormsoul.component.ModDataComponentTypes;
 import org.aussiebox.stormsoul.item.custom.SoulweaverNetItem;
 import org.aussiebox.stormsoul.item.custom.StormsoulIlluminosItem;
 import org.aussiebox.stormsoul.item.custom.WireSpoolItem;
+import org.aussiebox.stormsoul.item.custom.geckolib.ConnectedCasingItem;
+import org.aussiebox.stormsoul.item.custom.geckolib.LabrasteelChargerItem;
 import org.aussiebox.stormsoul.item.custom.geckolib.StormRodItem;
 import org.aussiebox.stormsoul.util.WireType;
 
@@ -77,6 +79,36 @@ public class ModItems {
                     .component(ModDataComponentTypes.WIRE_TYPE, WireType.IRON)
     );
 
+    public static final Item IMPURE_RAW_SILVER = registerItem(
+            "impure_raw_silver",
+            Item::new,
+            new Item.Settings()
+    );
+
+    public static final Item PURE_RAW_SILVER = registerItem(
+            "pure_raw_silver",
+            Item::new,
+            new Item.Settings()
+    );
+
+    public static final Item SILVER_INGOT = registerItem(
+            "silver_ingot",
+            Item::new,
+            new Item.Settings()
+    );
+
+    public static LabrasteelChargerItem LABRASTEEL_CHARGER = registerBlockItem(
+            "labrasteel_charger",
+            LabrasteelChargerItem::new,
+            new Item.Settings()
+    );
+
+    public static ConnectedCasingItem SILVER_CASING = registerBlockItem(
+            "silver_casing",
+            (settings) -> new ConnectedCasingItem(ModBlocks.SILVER_CASING, settings),
+            new Item.Settings()
+    );
+
     public static final RegistryKey<ItemGroup> ITEMGROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), Stormsoul.id(Stormsoul.MOD_ID));
     public static final ItemGroup ITEMGROUP = FabricItemGroup.builder()
             .icon(() -> new ItemStack(ModBlocks.STORM_ROD))
@@ -107,14 +139,24 @@ public class ModItems {
             itemGroup.add(ModBlocks.LABRADORITE_GEODE);
             itemGroup.add(LABRASTEEL_INGOT);
             itemGroup.add(ModBlocks.LABRASTEEL_BLOCK);
+            itemGroup.add(ModBlocks.SMOOTH_LABRASTEEL_BLOCK);
+            itemGroup.add(ModBlocks.SILVER_ORE);
+            itemGroup.add(ModBlocks.DEEPSLATE_SILVER_ORE);
+            itemGroup.add(IMPURE_RAW_SILVER);
+            itemGroup.add(ModBlocks.IMPURE_RAW_SILVER_BLOCK);
+            itemGroup.add(PURE_RAW_SILVER);
+            itemGroup.add(ModBlocks.PURE_RAW_SILVER_BLOCK);
+            itemGroup.add(SILVER_INGOT);
+            itemGroup.add(ModBlocks.SILVER_CASING);
             itemGroup.add(SOULWEAVER_NET);
             itemGroup.add(ModBlocks.ARTIFICIAL_CLOUD);
-            if (STORM_ROD != null) itemGroup.add(STORM_ROD);
+            itemGroup.add(ModBlocks.STORM_ROD);
             itemGroup.add(ModBlocks.COPPER_LABRASTEEL_BATTERY);
             itemGroup.add(ModBlocks.IRON_LABRASTEEL_BATTERY);
             itemGroup.add(ModBlocks.WIRE_CONNECTOR);
             itemGroup.add(COPPER_WIRE_SPOOL);
             itemGroup.add(IRON_WIRE_SPOOL);
+            itemGroup.add(ModBlocks.LABRASTEEL_CHARGER);
             itemGroup.add(STORMSOUL_ILLUMINOS);
         });
     }

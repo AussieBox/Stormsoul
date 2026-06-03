@@ -13,10 +13,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import org.aussiebox.stormsoul.Stormsoul;
-import org.aussiebox.stormsoul.block.custom.ArtificialCloudBlock;
-import org.aussiebox.stormsoul.block.custom.LabrasteelBatteryBlock;
-import org.aussiebox.stormsoul.block.custom.StormRodBlock;
-import org.aussiebox.stormsoul.block.custom.WireConnectorBlock;
+import org.aussiebox.stormsoul.block.custom.*;
 
 import java.util.function.Function;
 
@@ -48,7 +45,7 @@ public class ModBlocks {
 
     public static final Block LABRADORITE_ORE = registerWithItem(
             "labradorite_ore",
-            (settings) -> new ExperienceDroppingBlock(UniformIntProvider.create(3, 8), settings),
+            (settings) -> new ExperienceDroppingBlock(UniformIntProvider.create(1, 5), settings),
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.STONE_GRAY)
                     .strength(3.0F, 3.0F)
@@ -58,7 +55,7 @@ public class ModBlocks {
 
     public static final Block DEEPSLATE_LABRADORITE_ORE = registerWithItem(
             "deepslate_labradorite_ore",
-            (settings) -> new ExperienceDroppingBlock(UniformIntProvider.create(3, 8), settings),
+            (settings) -> new ExperienceDroppingBlock(UniformIntProvider.create(1, 5), settings),
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.DEEPSLATE_GRAY)
                     .strength(4.5F, 3.0F)
@@ -88,6 +85,16 @@ public class ModBlocks {
 
     public static final Block LABRASTEEL_BLOCK = registerWithItem(
             "labrasteel_block",
+            Block::new,
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.LAPIS_BLUE)
+                    .strength(5.0F, 6.0F)
+                    .sounds(BlockSoundGroup.METAL)
+                    .requiresTool()
+    );
+
+    public static final Block SMOOTH_LABRASTEEL_BLOCK = registerWithItem(
+            "smooth_labrasteel_block",
             Block::new,
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.LAPIS_BLUE)
@@ -130,6 +137,65 @@ public class ModBlocks {
                     .requiresTool()
                     .nonOpaque()
                     .solid()
+    );
+
+    public static final Block SILVER_ORE = registerWithItem(
+            "silver_ore",
+            (settings) -> new ExperienceDroppingBlock(UniformIntProvider.create(1, 6), settings),
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.STONE_GRAY)
+                    .strength(3.0F, 3.0F)
+                    .sounds(BlockSoundGroup.STONE)
+                    .requiresTool()
+    );
+
+    public static final Block DEEPSLATE_SILVER_ORE = registerWithItem(
+            "deepslate_silver_ore",
+            (settings) -> new ExperienceDroppingBlock(UniformIntProvider.create(1, 6), settings),
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.DEEPSLATE_GRAY)
+                    .strength(4.5F, 3.0F)
+                    .sounds(BlockSoundGroup.DEEPSLATE)
+                    .requiresTool()
+    );
+
+    public static final Block IMPURE_RAW_SILVER_BLOCK = registerWithItem(
+            "impure_raw_silver_block",
+            Block::new,
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.WHITE_GRAY)
+                    .strength(5.0F, 6.0F)
+                    .sounds(BlockSoundGroup.METAL)
+                    .requiresTool()
+    );
+
+    public static final Block PURE_RAW_SILVER_BLOCK = registerWithItem(
+            "pure_raw_silver_block",
+            Block::new,
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.WHITE_GRAY)
+                    .strength(5.0F, 6.0F)
+                    .sounds(BlockSoundGroup.METAL)
+                    .requiresTool()
+    );
+
+    public static final Block LABRASTEEL_CHARGER = register(
+            "labrasteel_charger",
+            LabrasteelChargerBlock::new,
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.LAPIS_BLUE)
+                    .strength(5.0F, 6.0F)
+                    .sounds(BlockSoundGroup.METAL)
+                    .requiresTool()
+    );
+
+    public static final Block SILVER_CASING = register(
+            "silver_casing",
+            (settings) -> new ConnectedCasingBlock(Stormsoul.id("textures/block/silver_casing.png"), settings),
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.WHITE_GRAY)
+                    .strength(2.0F, 3.0F)
+                    .sounds(BlockSoundGroup.WOOD)
     );
 
     private static Block register(String name, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings) {

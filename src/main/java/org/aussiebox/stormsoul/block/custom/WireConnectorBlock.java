@@ -19,25 +19,22 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import org.aussiebox.stormsoul.Stormsoul;
 import org.aussiebox.stormsoul.blockentity.ModBlockEntities;
 import org.aussiebox.stormsoul.blockentity.custom.WireConnectorBlockEntity;
+import org.aussiebox.stormsoul.util.StormsoulUtil;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Map;
 
 public class WireConnectorBlock extends BlockWithEntity {
     public static final MapCodec<WireConnectorBlock> CODEC = createCodec(WireConnectorBlock::new);
     public static final EnumProperty<Direction> FACING = Properties.FACING;
 
-    public static final VoxelShape UP_SHAPE = Block.createCuboidShape(5, 13, 5, 11, 16, 11);
-    public static final VoxelShape DOWN_SHAPE = Block.createCuboidShape(5, 0, 5, 11, 3, 11);
-    public static final VoxelShape NORTH_SHAPE = Block.createCuboidShape(5, 5, 0, 11, 11, 3);
-    public static final VoxelShape EAST_SHAPE = Block.createCuboidShape(13, 5, 5, 16, 11, 11);
-    public static final VoxelShape WEST_SHAPE = Block.createCuboidShape(0, 5, 5, 3, 11, 11);
-    public static final VoxelShape SOUTH_SHAPE = Block.createCuboidShape(5, 5, 13, 11, 11, 16);
+    private static final Map<Direction, VoxelShape> SHAPES = StormsoulUtil.createUpwardFacingShapeMap(Block.createCuboidShape(5, 13, 5, 11, 16, 11));
 
     public WireConnectorBlock(Settings settings) {
         super(settings);
@@ -60,29 +57,7 @@ public class WireConnectorBlock extends BlockWithEntity {
 
     @Override
     protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        switch (state.get(FACING)) {
-            case UP -> {
-                return UP_SHAPE;
-            }
-            case DOWN -> {
-                return DOWN_SHAPE;
-            }
-            case NORTH -> {
-                return NORTH_SHAPE;
-            }
-            case EAST -> {
-                return EAST_SHAPE;
-            }
-            case WEST -> {
-                return WEST_SHAPE;
-            }
-            case SOUTH -> {
-                return SOUTH_SHAPE;
-            }
-            case null, default -> {
-                return VoxelShapes.fullCube();
-            }
-        }
+        return SHAPES.get(state.get(FACING));
     }
 
     @Override

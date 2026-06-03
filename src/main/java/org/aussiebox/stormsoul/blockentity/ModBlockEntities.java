@@ -8,10 +8,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import org.aussiebox.stormsoul.Stormsoul;
 import org.aussiebox.stormsoul.block.ModBlocks;
-import org.aussiebox.stormsoul.blockentity.custom.ArtificialCloudBlockEntity;
-import org.aussiebox.stormsoul.blockentity.custom.LabrasteelBatteryBlockEntity;
-import org.aussiebox.stormsoul.blockentity.custom.StormRodBlockEntity;
-import org.aussiebox.stormsoul.blockentity.custom.WireConnectorBlockEntity;
+import org.aussiebox.stormsoul.blockentity.custom.*;
 
 public class ModBlockEntities {
 
@@ -26,6 +23,12 @@ public class ModBlockEntities {
             );
     public static final BlockEntityType<WireConnectorBlockEntity> WIRE_CONNECTOR_BLOCK_ENTITY =
             register("wire", WireConnectorBlockEntity::new, ModBlocks.WIRE_CONNECTOR);
+    public static final BlockEntityType<LabrasteelChargerBlockEntity> LABRASTEEL_CHARGER_BLOCK_ENTITY =
+            register("labrasteel_charger", LabrasteelChargerBlockEntity::new, ModBlocks.LABRASTEEL_CHARGER);
+    public static final BlockEntityType<ConnectedCasingBlockEntity> CONNECTED_CASING_BLOCK_ENTITY =
+            register("connected_casing", ConnectedCasingBlockEntity::new,
+                    ModBlocks.SILVER_CASING
+            );
 
     private static <T extends BlockEntity> BlockEntityType<T> register(String name, FabricBlockEntityTypeBuilder.Factory<? extends T> entityFactory, Block... blocks) {
         return Registry.register(Registries.BLOCK_ENTITY_TYPE, Stormsoul.id(name), FabricBlockEntityTypeBuilder.<T>create(entityFactory, blocks).build());

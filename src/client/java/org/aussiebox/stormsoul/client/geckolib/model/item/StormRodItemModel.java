@@ -18,7 +18,7 @@ public class StormRodItemModel extends GeoModel<StormRodItem> {
     }
 
     @Override
-    public Identifier getAnimationResource(StormRodItem stormRodItem) {
+    public Identifier getAnimationResource(StormRodItem item) {
         return Stormsoul.id("block/storm_rod");
     }
 }

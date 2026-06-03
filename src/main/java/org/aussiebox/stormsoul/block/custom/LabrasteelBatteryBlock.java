@@ -3,9 +3,7 @@ package org.aussiebox.stormsoul.block.custom;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
@@ -13,6 +11,9 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.aussiebox.stormsoul.Stormsoul;
 import org.aussiebox.stormsoul.blockentity.ModBlockEntities;
@@ -29,6 +30,8 @@ public class LabrasteelBatteryBlock extends BlockWithEntity  {
                     )
                     .apply(instance, LabrasteelBatteryBlock::new)
     );
+    private static final VoxelShape OUTLINE_SHAPE = VoxelShapes.union(Block.createCuboidShape(2, 0, 2, 14, 14, 14), Block.createCuboidShape(5, 14, 5, 11, 16, 11));
+
     private final String id;
     private final double maxStorage;
     private final Identifier texture;
@@ -51,6 +54,11 @@ public class LabrasteelBatteryBlock extends BlockWithEntity  {
     @Override
     protected MapCodec<? extends BlockWithEntity> getCodec() {
         return CODEC;
+    }
+
+    @Override
+    protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        return OUTLINE_SHAPE;
     }
 
     @Override

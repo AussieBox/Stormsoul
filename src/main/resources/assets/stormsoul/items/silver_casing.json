@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "stormsoul:block/silver_casing",
+    "model": {
+      "type": "geckolib:geckolib"
+    }
+  }
+}

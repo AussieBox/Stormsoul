@@ -18,7 +18,7 @@ public class StormsoulIlluminosModel extends GeoModel<StormsoulIlluminosItem> {
     }
 
     @Override
-    public Identifier getAnimationResource(StormsoulIlluminosItem stormsoulIlluminosItem) {
+    public Identifier getAnimationResource(StormsoulIlluminosItem blockEntity) {
         return Stormsoul.id("item/stormsoul_illuminos");
     }
 }

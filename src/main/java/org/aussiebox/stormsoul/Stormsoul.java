@@ -48,6 +48,8 @@ public class Stormsoul implements ModInitializer {
 
     public static final RegistryKey<PlacedFeature> LABRADORITE_ORE_PLACED_KEY = RegistryKey.of(RegistryKeys.PLACED_FEATURE, id("ore_labradorite"));
     public static final RegistryKey<PlacedFeature> LABRADORITE_ORE_BURIED_PLACED_KEY = RegistryKey.of(RegistryKeys.PLACED_FEATURE, id("ore_labradorite_buried"));
+    public static final RegistryKey<PlacedFeature> SILVER_ORE_PLACED_KEY = RegistryKey.of(RegistryKeys.PLACED_FEATURE, id("ore_silver"));
+    public static final RegistryKey<PlacedFeature> SILVEr_ORE_BURIED_PLACED_KEY = RegistryKey.of(RegistryKeys.PLACED_FEATURE, id("ore_silver_buried"));
 
     public static List<String> initMessages = new ArrayList<>();
 
@@ -55,7 +57,9 @@ public class Stormsoul implements ModInitializer {
     public void onInitialize() {
         initMessages.add("Cooking up a storm...");
         initMessages.add("Preparing elec-teriffic technology...");
-        initMessages.add("Did anyone let the souls out?");
+        initMessages.add("Who let the souls out?");
+        initMessages.add("Did you know? Silver is the most conductive metal on the planet!");
+        initMessages.add("Did you know? Labradorite is NOT the most conductive metal on the planet! This is because it is not a metal.");
         LOGGER.info(initMessages.get(RANDOM.nextInt(initMessages.size())));
 
         ModBlocks.init();
@@ -70,6 +74,8 @@ public class Stormsoul implements ModInitializer {
 
         BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, LABRADORITE_ORE_PLACED_KEY);
         BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, LABRADORITE_ORE_BURIED_PLACED_KEY);
+        BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, SILVER_ORE_PLACED_KEY);
+        BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, SILVEr_ORE_BURIED_PLACED_KEY);
 
         ServerTickEvents.END_SERVER_TICK.register(ArtificialCloudBlockEntity::serverTick);
 

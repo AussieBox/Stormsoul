@@ -1,16 +1,19 @@
 package org.aussiebox.stormsoul.util;
 
+import com.google.common.collect.Maps;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Pair;
-import net.minecraft.util.math.Vec2f;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.*;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
 import org.apache.commons.lang3.mutable.MutableInt;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class StormsoulUtil {
 
@@ -82,6 +85,29 @@ public class StormsoulUtil {
         float pitch = (float) (-Math.toDegrees(Math.atan2(diffY, distanceXZ)));
 
         return new Vec2f(pitch, yaw);
+    }
+
+    public static Map<Direction, VoxelShape> createUpwardFacingShapeMap(VoxelShape shape) {
+        return createUpwardFacingShapeMap(shape, new Vec3d(0.5, 0.5, 0.5));
+    }
+
+    public static Map<Direction, VoxelShape> createUpwardFacingShapeMap(VoxelShape shape, Vec3d anchor) {
+        return Maps.newEnumMap(
+                Map.of(
+                        Direction.NORTH,
+                        VoxelShapes.transform(shape, DirectionTransformation.fromRotations(AxisRotation.R270, AxisRotation.R180), anchor),
+                        Direction.EAST,
+                        VoxelShapes.transform(shape, DirectionTransformation.ROT_90_Z_NEG, anchor),
+                        Direction.SOUTH,
+                        VoxelShapes.transform(shape, DirectionTransformation.fromRotations(AxisRotation.R90, AxisRotation.R180), anchor),
+                        Direction.WEST,
+                        VoxelShapes.transform(shape, DirectionTransformation.ROT_90_Z_POS, anchor),
+                        Direction.UP,
+                        shape,
+                        Direction.DOWN,
+                        VoxelShapes.transform(shape, DirectionTransformation.fromRotations(AxisRotation.R180, AxisRotation.R0), anchor)
+                )
+        );
     }
 
 }

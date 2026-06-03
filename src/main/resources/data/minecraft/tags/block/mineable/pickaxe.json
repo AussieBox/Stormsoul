@@ -7,6 +7,11 @@
     "stormsoul:labradorite_block",
     "stormsoul:labradorite_geode",
     "stormsoul:labrasteel_block",
-    "#stormsoul:batteries"
+    "#stormsoul:batteries",
+    "stormsoul:silver_ore",
+    "stormsoul:deepslate_silver_ore",
+    "stormsoul:impure_raw_silver_block",
+    "stormsoul:pure_raw_silver_block",
+    "stormsoul:silver_casing"
   ]
 }

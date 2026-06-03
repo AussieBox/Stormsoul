@@ -26,7 +26,7 @@ public class LabrasteelBatteryModel extends GeoModel<LabrasteelBatteryBlockEntit
     }
 
     @Override
-    public Identifier getAnimationResource(LabrasteelBatteryBlockEntity labradoriteBatteryBlockEntity) {
+    public Identifier getAnimationResource(LabrasteelBatteryBlockEntity blockEntity) {
         return Stormsoul.id("block/labrasteel_battery");
     }
 }
