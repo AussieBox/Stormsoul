@@ -27,6 +27,7 @@ import org.aussiebox.stormsoul.cca.PlayerComponent;
 import org.aussiebox.stormsoul.client.geckolib.renderer.*;
 import org.aussiebox.stormsoul.client.geckolib.renderer.item.ConnectedCasingItemRenderer;
 import org.aussiebox.stormsoul.client.geckolib.renderer.item.LabrasteelChargerItemRenderer;
+import org.aussiebox.stormsoul.client.geckolib.renderer.item.LabrasteelClampItemRenderer;
 import org.aussiebox.stormsoul.client.geckolib.renderer.item.StormRodItemRenderer;
 import org.aussiebox.stormsoul.client.mixin.accessor.EntityTrackingSoundInstanceAccessor;
 import org.aussiebox.stormsoul.client.mixin.accessor.SoundManagerAccessor;
@@ -37,9 +38,11 @@ import org.aussiebox.stormsoul.client.particle.SurgeTrailParticle;
 import org.aussiebox.stormsoul.client.render.blockentity.ArtificialCloudBlockEntityRenderer;
 import org.aussiebox.stormsoul.client.render.blockentity.WireConnectorBlockEntityRenderer;
 import org.aussiebox.stormsoul.item.ModItems;
+import org.aussiebox.stormsoul.item.custom.SoulweaverNetItem;
 import org.aussiebox.stormsoul.item.custom.StormsoulIlluminosItem;
 import org.aussiebox.stormsoul.item.custom.geckolib.ConnectedCasingItem;
 import org.aussiebox.stormsoul.item.custom.geckolib.LabrasteelChargerItem;
+import org.aussiebox.stormsoul.item.custom.geckolib.LabrasteelClampItem;
 import org.aussiebox.stormsoul.item.custom.geckolib.StormRodItem;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.client.GeoRenderProvider;
@@ -56,7 +59,8 @@ public class StormsoulClient implements ClientModInitializer {
                 ModBlocks.STORM_ROD,
                 ModBlocks.COPPER_LABRASTEEL_BATTERY,
                 ModBlocks.IRON_LABRASTEEL_BATTERY,
-                ModBlocks.LABRASTEEL_CHARGER
+                ModBlocks.LABRASTEEL_CHARGER,
+                ModBlocks.LABRASTEEL_CLAMP
         );
 
         BlockEntityRendererFactories.register(ModBlockEntities.ARTIFICIAL_CLOUD_BLOCK_ENTITY, ArtificialCloudBlockEntityRenderer::new);
@@ -65,6 +69,7 @@ public class StormsoulClient implements ClientModInitializer {
         BlockEntityRendererFactories.register(ModBlockEntities.WIRE_CONNECTOR_BLOCK_ENTITY, WireConnectorBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntities.LABRASTEEL_CHARGER_BLOCK_ENTITY, (context) -> new LabrasteelChargerRenderer());
         BlockEntityRendererFactories.register(ModBlockEntities.CONNECTED_CASING_BLOCK_ENTITY, (context) -> new ConnectedCasingRenderer());
+        BlockEntityRendererFactories.register(ModBlockEntities.LABRASTEEL_CLAMP_BLOCK_ENTITY, (context) -> new LabrasteelClampRenderer());
 
         EntityModelLayerRegistry.registerModelLayer(ArtificialCloudModel.LAYER, ArtificialCloudModel::getTexturedModelData);
 
@@ -77,6 +82,15 @@ public class StormsoulClient implements ClientModInitializer {
 
             @Override
             public @Nullable GeoItemRenderer<StormsoulIlluminosItem> getGeoItemRenderer() {
+                return this.renderer.get();
+            }
+        });
+
+        ModItems.SOULWEAVER_NET.geoRenderProvider.setValue(new GeoRenderProvider() {
+            private final Supplier<GeoItemRenderer<SoulweaverNetItem>> renderer = Suppliers.memoize(SoulweaverNetRenderer::new);
+
+            @Override
+            public @Nullable GeoItemRenderer<SoulweaverNetItem> getGeoItemRenderer() {
                 return this.renderer.get();
             }
         });
@@ -104,6 +118,15 @@ public class StormsoulClient implements ClientModInitializer {
 
             @Override
             public @Nullable GeoItemRenderer<ConnectedCasingItem> getGeoItemRenderer() {
+                return this.renderer.get();
+            }
+        });
+
+        ModItems.LABRASTEEL_CLAMP.geoRenderProvider.setValue(new GeoRenderProvider() {
+            private final Supplier<GeoItemRenderer<LabrasteelClampItem>> renderer = Suppliers.memoize(LabrasteelClampItemRenderer::new);
+
+            @Override
+            public @Nullable GeoItemRenderer<LabrasteelClampItem> getGeoItemRenderer() {
                 return this.renderer.get();
             }
         });

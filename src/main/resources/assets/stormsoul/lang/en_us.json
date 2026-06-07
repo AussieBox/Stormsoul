@@ -4,6 +4,7 @@
   "item.stormsoul.labradorite": "Labradorite",
   "item.stormsoul.labrasteel_ingot": "Labrasteel Ingot",
   "item.stormsoul.stormsoul_illuminos": "Stormsoul Illuminos",
+  "item.stormsoul.soulweaver_net": "Soulweaver Net",
   "item.stormsoul.copper_wire_spool": "Spool of Copper Wire",
   "item.stormsoul.iron_wire_spool": "Spool of Iron Wire",
   "item.stormsoul.impure_raw_silver": "Impure Raw Silver",
@@ -27,13 +28,16 @@
   "block.stormsoul.pure_raw_silver_block": "Block of Pure Raw Silver",
   "block.stormsoul.silver_casing": "Silver Casing",
   "block.stormsoul.labrasteel_charger": "Labrasteel Charger",
+  "block.stormsoul.labrasteel_clamp": "Labrasteel Clamp",
 
   "tooltip.stormsoul.stored_stormsoul": "Stormsoul: %s/%s",
 
   "config.jade.plugin_stormsoul.stored_stormsoul": "Stored Stormsoul",
 
   "category.rei.stormsoul.controlled_shock": "Controlled Shock",
-  "category.rei.stormsoul.controlled_shock.ingredients": "Ingredients:",
+    "category.rei.stormsoul.controlled_shock.ingredients": "Ingredients:",
+  "category.rei.stormsoul.charging": "Charging",
+    "category.rei.stormsoul.charging.stormsoul": "Stormsoul: %s",
 
   "block.property.boolean.true": "true",
   "block.property.boolean.false": "false",
@@ -43,6 +47,7 @@
 
   "death.attack.energy_transmission": "%s's head was the most efficient connection",
   "death.attack.zipline_fall": "%s was the weakest link",
+  "death.attack.charger_interference": "%s interfered with unsafe machinery",
 
   "command.main.advance_storm.true": "Advanced Artificial Storm state, it is now storming.",
   "command.main.advance_storm.false": "Advanced Artificial Storm state, it is no longer storming."

@@ -14,6 +14,7 @@ import org.apache.commons.lang3.mutable.MutableInt;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class StormsoulUtil {
 
@@ -108,6 +109,13 @@ public class StormsoulUtil {
                         VoxelShapes.transform(shape, DirectionTransformation.fromRotations(AxisRotation.R180, AxisRotation.R0), anchor)
                 )
         );
+    }
+
+    public static Vec3d getRandomPosition(Box box, Random random) {
+        double x = MathHelper.lerp(random.nextDouble(), box.minX, box.maxX);
+        double y = MathHelper.lerp(random.nextDouble(), box.minY, box.maxY);
+        double z = MathHelper.lerp(random.nextDouble(), box.minZ, box.maxZ);
+        return new Vec3d(x, y, z);
     }
 
 }

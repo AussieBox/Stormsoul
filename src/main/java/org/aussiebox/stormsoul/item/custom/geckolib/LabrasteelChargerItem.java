@@ -3,7 +3,6 @@ package org.aussiebox.stormsoul.item.custom.geckolib;
 import com.llamalad7.mixinextras.lib.apache.commons.mutable.MutableObject;
 import net.minecraft.item.BlockItem;
 import org.aussiebox.stormsoul.block.ModBlocks;
-import software.bernie.geckolib.animatable.GeoBlockEntity;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.client.GeoRenderProvider;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
@@ -24,8 +23,8 @@ public class LabrasteelChargerItem extends BlockItem implements GeoItem {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<GeoBlockEntity>("Spin", (test) -> test.setAndContinue(RawAnimation.begin().thenLoop("spin"))));
-        controllers.add(new AnimationController<GeoBlockEntity>("EnergyRing", (test) -> test.setAndContinue(RawAnimation.begin().thenLoop("energy_ring"))));
+        controllers.add(new AnimationController<GeoItem>("Spin", (test) -> test.setAndContinue(RawAnimation.begin().thenLoop("spin"))));
+        controllers.add(new AnimationController<GeoItem>("EnergyRing", (test) -> test.setAndContinue(RawAnimation.begin().thenLoop("energy_ring"))));
     }
 
     @Override

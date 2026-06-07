@@ -5,6 +5,7 @@ import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.book.RecipeBookCategory;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import org.aussiebox.stormsoul.recipe.serializer.ChargingRecipeSerializer;
 import org.aussiebox.stormsoul.recipe.serializer.ControlledShockRecipeSerializer;
 
 public class ModRecipes {
@@ -24,6 +25,24 @@ public class ModRecipes {
             Registries.RECIPE_SERIALIZER,
             ControlledShockRecipe.ID,
             ControlledShockRecipeSerializer.INSTANCE
+    );
+
+    public static final RecipeBookCategory CHARGING_CATEGORY = Registry.register(
+            Registries.RECIPE_BOOK_CATEGORY,
+            ChargingRecipe.ID,
+            new RecipeBookCategory()
+    );
+
+    public static final RecipeType<ChargingRecipe> CHARGING_TYPE = Registry.register(
+            Registries.RECIPE_TYPE,
+            ChargingRecipe.ID,
+            ChargingRecipe.Type.INSTANCE
+    );
+
+    public static final RecipeSerializer<ChargingRecipe> CHARGING_SERIALIZER = Registry.register(
+            Registries.RECIPE_SERIALIZER,
+            ChargingRecipe.ID,
+            ChargingRecipeSerializer.INSTANCE
     );
 
     public static void init() {

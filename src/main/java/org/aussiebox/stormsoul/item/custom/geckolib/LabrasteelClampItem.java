@@ -13,17 +13,17 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.function.Consumer;
 
-public class StormRodItem extends BlockItem implements GeoItem {
+public class LabrasteelClampItem extends BlockItem implements GeoItem {
     public final MutableObject<GeoRenderProvider> geoRenderProvider = new MutableObject<>();
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 
-    public StormRodItem(Settings settings) {
-        super(ModBlocks.STORM_ROD, settings);
+    public LabrasteelClampItem(Settings settings) {
+        super(ModBlocks.LABRASTEEL_CLAMP, settings);
     }
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<GeoItem>("Main", (test) -> test.setAndContinue(RawAnimation.begin().thenLoop("idle"))));
+        controllers.add(new AnimationController<GeoItem>("Clamp", (test) -> test.setAndContinue(RawAnimation.begin().thenPlayAndHold("clamp"))));
     }
 
     @Override

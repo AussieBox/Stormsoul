@@ -36,6 +36,8 @@ public class StormRodBlock extends RodBlockWithEntity {
     public BlockState getPlacementState(ItemPlacementContext context) {
         FluidState fluidState = context.getWorld().getFluidState(context.getBlockPos());
         boolean waterlogged = fluidState.getFluid() == Fluids.WATER;
+        if (context.getPlayer() != null)
+            if (context.getPlayer().isSneaking()) return this.getDefaultState().with(FACING, context.getSide().getOpposite()).with(WATERLOGGED, waterlogged);
         return this.getDefaultState().with(FACING, context.getSide()).with(WATERLOGGED, waterlogged);
     }
 

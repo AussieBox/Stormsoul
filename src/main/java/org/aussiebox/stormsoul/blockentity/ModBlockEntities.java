@@ -29,6 +29,8 @@ public class ModBlockEntities {
             register("connected_casing", ConnectedCasingBlockEntity::new,
                     ModBlocks.SILVER_CASING
             );
+    public static final BlockEntityType<LabrasteelClampBlockEntity> LABRASTEEL_CLAMP_BLOCK_ENTITY =
+            register("labrasteel_clamp", LabrasteelClampBlockEntity::new, ModBlocks.LABRASTEEL_CLAMP);
 
     private static <T extends BlockEntity> BlockEntityType<T> register(String name, FabricBlockEntityTypeBuilder.Factory<? extends T> entityFactory, Block... blocks) {
         return Registry.register(Registries.BLOCK_ENTITY_TYPE, Stormsoul.id(name), FabricBlockEntityTypeBuilder.<T>create(entityFactory, blocks).build());

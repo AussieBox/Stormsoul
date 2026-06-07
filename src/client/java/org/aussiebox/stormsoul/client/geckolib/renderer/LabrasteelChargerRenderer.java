@@ -19,20 +19,22 @@ public class LabrasteelChargerRenderer extends GeoBlockRenderer<LabrasteelCharge
         switch (facing) {
             case DOWN -> {
                 poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180));
+                poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180));
                 poseStack.translate(0, -1, 0);
             }
             case EAST -> {
                 poseStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(-90));
-                poseStack.translate(-0.5, -0.5, 0);
+                poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(90));
+                poseStack.translate(0, -0.5, -0.5);
             }
             case WEST -> {
                 poseStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(90));
-                poseStack.translate(0.5, -0.5, 0);
+                poseStack.multiply(RotationAxis.NEGATIVE_Y.rotationDegrees(90));
+                poseStack.translate(0, -0.5, -0.5);
             }
             case NORTH -> {
                 poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-90));
-                poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180));
-                poseStack.translate(0, -0.5, -0.5);
+                poseStack.translate(0, -0.5, 0.5);
             }
             case SOUTH -> {
                 poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90));

@@ -13,12 +13,14 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.PlacedFeature;
 import org.aussiebox.stormsoul.block.ModBlocks;
 import org.aussiebox.stormsoul.blockentity.ModBlockEntities;
 import org.aussiebox.stormsoul.blockentity.custom.ArtificialCloudBlockEntity;
 import org.aussiebox.stormsoul.blockentity.custom.LabrasteelBatteryBlockEntity;
+import org.aussiebox.stormsoul.blockentity.custom.LabrasteelChargerBlockEntity;
 import org.aussiebox.stormsoul.command.MainCommand;
 import org.aussiebox.stormsoul.component.ModDataComponentTypes;
 import org.aussiebox.stormsoul.item.ModItems;
@@ -49,7 +51,7 @@ public class Stormsoul implements ModInitializer {
     public static final RegistryKey<PlacedFeature> LABRADORITE_ORE_PLACED_KEY = RegistryKey.of(RegistryKeys.PLACED_FEATURE, id("ore_labradorite"));
     public static final RegistryKey<PlacedFeature> LABRADORITE_ORE_BURIED_PLACED_KEY = RegistryKey.of(RegistryKeys.PLACED_FEATURE, id("ore_labradorite_buried"));
     public static final RegistryKey<PlacedFeature> SILVER_ORE_PLACED_KEY = RegistryKey.of(RegistryKeys.PLACED_FEATURE, id("ore_silver"));
-    public static final RegistryKey<PlacedFeature> SILVEr_ORE_BURIED_PLACED_KEY = RegistryKey.of(RegistryKeys.PLACED_FEATURE, id("ore_silver_buried"));
+    public static final RegistryKey<PlacedFeature> SILVER_ORE_BURIED_PLACED_KEY = RegistryKey.of(RegistryKeys.PLACED_FEATURE, id("ore_silver_buried"));
 
     public static List<String> initMessages = new ArrayList<>();
 
@@ -75,7 +77,7 @@ public class Stormsoul implements ModInitializer {
         BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, LABRADORITE_ORE_PLACED_KEY);
         BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, LABRADORITE_ORE_BURIED_PLACED_KEY);
         BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, SILVER_ORE_PLACED_KEY);
-        BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, SILVEr_ORE_BURIED_PLACED_KEY);
+        BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, SILVER_ORE_BURIED_PLACED_KEY);
 
         ServerTickEvents.END_SERVER_TICK.register(ArtificialCloudBlockEntity::serverTick);
 
@@ -84,6 +86,10 @@ public class Stormsoul implements ModInitializer {
         }));
 
         MolangQueries.<LabrasteelBatteryBlockEntity>setActorVariable("query.stormsoul_capacity_percentage", actor -> 1-(actor.animatable().getStoredStormsoul()/actor.animatable().getMaxStoredStormsoul()));
+        MolangQueries.<LabrasteelChargerBlockEntity>setActorVariable("query.stormsoul_spin_time", actor -> {
+            if (actor.animatable() instanceof LabrasteelChargerBlockEntity entity) return MathHelper.lerp(actor.partialTick(), entity.getLastSpinTime(), entity.getSpinTime());
+            else return actor.animationTicks()*8;
+        });
 
         LOGGER.info("Common initialisation complete, enjoy!");
     }

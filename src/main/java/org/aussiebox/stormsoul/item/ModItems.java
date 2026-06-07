@@ -19,6 +19,7 @@ import org.aussiebox.stormsoul.item.custom.StormsoulIlluminosItem;
 import org.aussiebox.stormsoul.item.custom.WireSpoolItem;
 import org.aussiebox.stormsoul.item.custom.geckolib.ConnectedCasingItem;
 import org.aussiebox.stormsoul.item.custom.geckolib.LabrasteelChargerItem;
+import org.aussiebox.stormsoul.item.custom.geckolib.LabrasteelClampItem;
 import org.aussiebox.stormsoul.item.custom.geckolib.StormRodItem;
 import org.aussiebox.stormsoul.util.WireType;
 
@@ -49,7 +50,7 @@ public class ModItems {
             new Item.Settings()
     );
 
-    public static final Item SOULWEAVER_NET = registerItem(
+    public static final SoulweaverNetItem SOULWEAVER_NET = registerItem(
             "soulweaver_net",
             SoulweaverNetItem::new,
             new Item.Settings()
@@ -109,6 +110,12 @@ public class ModItems {
             new Item.Settings()
     );
 
+    public static LabrasteelClampItem LABRASTEEL_CLAMP = registerBlockItem(
+            "labrasteel_clamp",
+            LabrasteelClampItem::new,
+            new Item.Settings()
+    );
+
     public static final RegistryKey<ItemGroup> ITEMGROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), Stormsoul.id(Stormsoul.MOD_ID));
     public static final ItemGroup ITEMGROUP = FabricItemGroup.builder()
             .icon(() -> new ItemStack(ModBlocks.STORM_ROD))
@@ -157,6 +164,7 @@ public class ModItems {
             itemGroup.add(COPPER_WIRE_SPOOL);
             itemGroup.add(IRON_WIRE_SPOOL);
             itemGroup.add(ModBlocks.LABRASTEEL_CHARGER);
+            itemGroup.add(ModBlocks.LABRASTEEL_CLAMP);
             itemGroup.add(STORMSOUL_ILLUMINOS);
         });
     }

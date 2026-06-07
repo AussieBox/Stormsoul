@@ -2,23 +2,23 @@ package org.aussiebox.stormsoul.client.geckolib.model;
 
 import net.minecraft.util.Identifier;
 import org.aussiebox.stormsoul.Stormsoul;
-import org.aussiebox.stormsoul.item.custom.StormsoulIlluminosItem;
+import org.aussiebox.stormsoul.blockentity.custom.LabrasteelClampBlockEntity;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.base.GeoRenderState;
 
-public class StormsoulIlluminosModel extends GeoModel<StormsoulIlluminosItem> {
+public class LabrasteelClampModel extends GeoModel<LabrasteelClampBlockEntity> {
     @Override
     public Identifier getModelResource(GeoRenderState geoRenderState) {
-        return Stormsoul.id("item/stormsoul_illuminos");
+        return Stormsoul.id("block/labrasteel_clamp");
     }
 
     @Override
     public Identifier getTextureResource(GeoRenderState geoRenderState) {
-        return Stormsoul.id("textures/item/stormsoul_illuminos.png");
+        return Stormsoul.id("textures/block/labrasteel_clamp.png");
     }
 
     @Override
-    public Identifier getAnimationResource(StormsoulIlluminosItem item) {
-        return Stormsoul.id("item/stormsoul_illuminos");
+    public Identifier getAnimationResource(LabrasteelClampBlockEntity blockEntity) {
+        return Stormsoul.id("block/labrasteel_clamp");
     }
 }

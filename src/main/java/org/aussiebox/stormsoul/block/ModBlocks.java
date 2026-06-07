@@ -198,6 +198,16 @@ public class ModBlocks {
                     .sounds(BlockSoundGroup.WOOD)
     );
 
+    public static final Block LABRASTEEL_CLAMP = register(
+            "labrasteel_clamp",
+            LabrasteelClampBlock::new,
+            AbstractBlock.Settings.create()
+                    .mapColor(MapColor.LAPIS_BLUE)
+                    .strength(5.0F, 6.0F)
+                    .sounds(BlockSoundGroup.METAL)
+                    .requiresTool()
+    );
+
     private static Block register(String name, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings) {
         RegistryKey<Block> blockKey = keyOfBlock(name);
         Block block = blockFactory.apply(settings.registryKey(blockKey));

@@ -1,0 +1,8 @@
+{
+  "type": "stormsoul:charging",
+  "ingredient": "stormsoul:impure_raw_silver",
+  "stormsoul": 50,
+  "result": {
+    "id": "stormsoul:pure_raw_silver"
+  }
+}

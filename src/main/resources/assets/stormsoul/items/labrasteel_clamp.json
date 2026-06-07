@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "stormsoul:block/labrasteel_clamp",
+    "model": {
+      "type": "geckolib:geckolib"
+    }
+  }
+}

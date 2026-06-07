@@ -6,12 +6,7 @@
 			"bones": {
 				"prongs": {
 					"rotation": {
-						"vector": [0, "-query.anim_time*100", 0]
-					}
-				},
-				"west": {
-					"rotation": {
-						"vector": [0, 0, 0]
+						"vector": [0, "-query.stormsoul_spin_time", 0]
 					}
 				}
 			}

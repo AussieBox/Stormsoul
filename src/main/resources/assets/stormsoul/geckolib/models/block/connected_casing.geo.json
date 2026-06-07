@@ -421,7 +421,7 @@
 							"size": [1.99, 12, 3.01],
 							"inflate": 0.01,
 							"uv": {
-								"north": {"uv": [2, 14], "uv_size": [12, 2], "uv_rotation": 90},
+								"north": {"uv": [2, 14], "uv_size": [12, 2], "uv_rotation": 270},
 								"west": {"uv": [0, 2], "uv_size": [3.01, 12]}
 							}
 						}
